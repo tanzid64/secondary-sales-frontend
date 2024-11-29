@@ -1,19 +1,19 @@
-import { Loader } from '@/components/loader';
-import OrderPDF from '@/components/order-pdf-renderer';
-import { buttonVariants } from '@/components/ui/button';
-import { axiosInstance } from '@/lib/axios';
-import { ProductDetailType } from '@/lib/types';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import { useQuery } from '@tanstack/react-query';
-import { format } from 'date-fns';
-import { DownloadIcon, PrinterIcon } from 'lucide-react';
-import { FC } from 'react';
-import { Link, useParams } from 'react-router';
+import { Loader } from "@/components/loader";
+import OrderPDF from "@/components/order-pdf-renderer";
+import { buttonVariants } from "@/components/ui/button";
+import { axiosInstance } from "@/lib/axios";
+import { ProductDetailType } from "@/lib/types";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { DownloadIcon, PrinterIcon } from "lucide-react";
+import { FC } from "react";
+import { Link, useParams } from "react-router";
 
 const RetailOrderDetailsPage: FC = () => {
   const { id } = useParams();
 
-  const {data, isFetching} = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: ["retail-order", id],
     queryFn: async () => {
       const res = await axiosInstance.get(
@@ -22,10 +22,16 @@ const RetailOrderDetailsPage: FC = () => {
       return res.data.data;
     },
   });
-  if(!data) return <div>Loading...</div>;
+  if (!data)
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
   return (
     <Loader isLoading={isFetching}>
       <div className="w-full h-full px-8 text-sm leading-1">
+        <h1 className="text-2xl my-8 w-full text-center">Order</h1>
         {/* Header */}
         <div className=" flex justify-between items-start">
           {/* Company Info */}
@@ -138,6 +144,10 @@ const RetailOrderDetailsPage: FC = () => {
               </tr>
             </tfoot>
           </table>
+        </div>
+        {/* Signature */}
+        <div className="mt-16 flex flex-col w-full  items-end">
+          <p className="border-t p-2">Authorized Signature</p>
         </div>
       </div>
     </Loader>

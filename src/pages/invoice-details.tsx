@@ -23,13 +23,17 @@ const InvoiceDetails: FC = () => {
     },
   });
 
-  if (!invoice) {
-    return <div>Loading...</div>;
-  }
+  if (!invoice)
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
 
   return (
     <Loader isLoading={isFetching}>
       <div className="w-full h-full px-8 text-sm leading-1">
+        <h1 className="text-2xl my-8 w-full text-center">Invoice</h1>
         {/* Header */}
         <div className=" flex justify-between items-start">
           {/* Company Info */}

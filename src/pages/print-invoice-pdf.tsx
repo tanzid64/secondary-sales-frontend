@@ -18,7 +18,12 @@ const PrintInvoicePDF: FC = () => {
       return res.data.data;
     },
   });
-  if (!invoice) return <div>Loading...</div>;
+  if (!invoice)
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
   return (
     <Loader isLoading={isFetching}>
       <PDFViewer width="100%" height="100%" className="h-screen">

@@ -2,6 +2,8 @@ import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router";
 import InvoiceDetails from "./pages/invoice-details";
 import PrintInvoicePDF from "./pages/print-invoice-pdf";
+import PrintOrderPDF from "./pages/print-order-pdf";
+import PrintSalesReturnPDF from "./pages/print-sales-return-pdf";
 import RetailInvoicesPage from "./pages/retail-invoices";
 import { RetailOrderPage } from "./pages/retail-order";
 import RetailOrderDetailsPage from "./pages/retail-order-details";
@@ -9,7 +11,6 @@ import SalesReturnDetails from "./pages/sales-return-details";
 import SalesReturn from "./pages/sales-return-page";
 import SignIn from "./pages/sign-in";
 import ProtectedRouteProvider from "./providers/protected-routes";
-import PrintOrderPDF from "./pages/print-order-pdf";
 
 const App: FC = () => {
   return (
@@ -36,6 +37,10 @@ const App: FC = () => {
         <Route
           path="/sales-return-details/:id"
           element={<SalesReturnDetails />}
+        />
+        <Route
+          path="/sales-return-print/:id"
+          element={<PrintSalesReturnPDF />}
         />
       </Route>
     </Routes>
