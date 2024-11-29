@@ -19,6 +19,7 @@ const App: FC = () => {
         <Route path="/retail-orders" element={<RetailOrderPage />} />
         <Route path="/retail-invoices" element={<RetailInvoicesPage />} />
         <Route path="/retail-invoices/:id" element={<InvoiceDetails />} />
+        {/* <Route path="/retail-invoices-print/:id" element={< />} /> */}
       </Route>
     </Routes>
   );
