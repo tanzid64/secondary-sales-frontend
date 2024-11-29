@@ -54,7 +54,6 @@ const InvoiceDetails: FC = () => {
 
             <Link
               to={`/retail-invoices-print/${id}`}
-              target="_blank"
               className={buttonVariants({
                 size: "sm",
                 variant: "secondary",

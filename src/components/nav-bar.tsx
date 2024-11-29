@@ -74,12 +74,12 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
           </li>
           <li>
             <NavLink
-              to="/"
+              to="/sales-return"
               className={buttonVariants({
                 size: "lg",
-                variant: location.pathname === "/" ? "outline" : "link",
+                variant: location.pathname === "/sales-return" ? "outline" : "link",
                 className:
-                  location.pathname === "/"
+                  location.pathname === "/sales-return"
                     ? "font-bold border-accent-foreground"
                     : "",
               })}
