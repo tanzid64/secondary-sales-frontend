@@ -128,8 +128,15 @@ const RetailInvoicesPage: FC = () => {
             className={cn("px-2 py-1 rounded-full text-xs font-semibold", {
               "bg-green-100 text-green-800":
                 row.getValue("delivery_status_name") === "Delivered",
-              "bg-yellow-100 text-yellow-800":
-                row.getValue("delivery_status_name") === "Not Delivered",
+              "bg-red-100 text-red-800":
+                row.getValue("delivery_status_name") === "Cancelled",
+              "bg-yellow-100 text-yellow-800": [
+                "Pending",
+                "Due",
+                "Not Delivered",
+              ].includes(row.getValue("delivery_status_name")),
+              "bg-blue-100 text-blue-800":
+                row.getValue("delivery_status_name") === "Paid",
             })}
           >
             {row.getValue("delivery_status_name")}
@@ -143,9 +150,9 @@ const RetailInvoicesPage: FC = () => {
           <span
             className={cn("px-2 py-1 rounded-full text-xs font-semibold", {
               "bg-green-100 text-green-800":
-                row.getValue("cancel_status_name") === "Cancelled",
-              "bg-yellow-100 text-yellow-800":
                 row.getValue("cancel_status_name") === "Not Cancelled",
+              "bg-red-100 text-red-800":
+                row.getValue("cancel_status_name") === "Cancelled",
             })}
           >
             {row.getValue("cancel_status_name")}
@@ -158,7 +165,7 @@ const RetailInvoicesPage: FC = () => {
         cell: ({ row }) => (
           <div className="flex items-center gap-2">
             <Button
-            variant={"link"}
+              variant={"link"}
               className="text-green-500 hover:text-green-600"
               onClick={() => {
                 navigate(`/retail-invoices/${row.getValue("id")}`);

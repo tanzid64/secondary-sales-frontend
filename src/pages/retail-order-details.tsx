@@ -1,10 +1,14 @@
 import { Loader } from '@/components/loader';
+import OrderPDF from '@/components/order-pdf-renderer';
+import { buttonVariants } from '@/components/ui/button';
 import { axiosInstance } from '@/lib/axios';
 import { ProductDetailType } from '@/lib/types';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
+import { DownloadIcon, PrinterIcon } from 'lucide-react';
 import { FC } from 'react';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 const RetailOrderDetailsPage: FC = () => {
   const { id } = useParams();
@@ -31,10 +35,10 @@ const RetailOrderDetailsPage: FC = () => {
             <p className="uppercase text-lg">{data.outlet_name}</p>
           </div>
           {/* Buttons */}
-          {/* <div className="space-x-4">
+          <div className="space-x-4">
             <PDFDownloadLink
-              document={<InvoicePDF invoice={invoice} />}
-              fileName={`Invoice_${invoice?.inv_number || "unknown"}.pdf`}
+              document={<OrderPDF order={data} />}
+              fileName={`Invoice_${data?.ord_number || "unknown"}.pdf`}
               className={buttonVariants({
                 size: "sm",
                 variant: "secondary",
@@ -45,7 +49,7 @@ const RetailOrderDetailsPage: FC = () => {
             </PDFDownloadLink>
 
             <Link
-              to={`/retail-invoices-print/${id}`}
+              to={`/retail-order-print/${id}`}
               className={buttonVariants({
                 size: "sm",
                 variant: "secondary",
@@ -54,7 +58,7 @@ const RetailOrderDetailsPage: FC = () => {
               <PrinterIcon className="size-4" />
               <span>Print</span>
             </Link>
-          </div> */}
+          </div>
         </div>
 
         <div className="mt-8 flex justify-between items-end">
@@ -67,6 +71,11 @@ const RetailOrderDetailsPage: FC = () => {
             </p>
             <p>Order No: {data.ord_number}</p>
           </div>
+        </div>
+
+        {/* Status */}
+        <div className="flex justify-between items-center mt-8">
+          <p>Delivery Status: {data.dlv_status}</p>
         </div>
 
         {/* Product Details */}

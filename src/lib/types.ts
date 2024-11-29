@@ -11,6 +11,25 @@ export interface UserType {
   updatedAt: Date;
 }
 
+export interface ProductDetailType {
+  inv_details_id: number;
+  product_id: number;
+  product_name: string;
+  product_code: string;
+  root_category: number;
+  root_category_name: string;
+  category: number;
+  product_cat_name: string;
+  vol: string;
+  ctn_size: number;
+  pqty_in_ctn: number;
+  pqty_in_pcs: number;
+  line_total: string;
+  ctn_price: string;
+  pcs_price: string;
+  image: string;
+}
+
 export interface RetailOrderType {
   id: number;
   outlet_id: number;
@@ -29,6 +48,11 @@ export interface RetailOrderType {
     | "Paid";
   outlet_name: string;
   outlet_code: string;
+}
+
+export interface RetailOrderDetailsType extends RetailOrderType {
+  product_details: ProductDetailType[];
+  offer_details: any[];
 }
 
 export interface RetailInvoiceType {
@@ -51,25 +75,6 @@ export interface RetailInvoiceType {
   outlet_name: string;
   distri_id: number;
   distributor_name: string;
-}
-
-export interface ProductDetailType {
-  inv_details_id: number;
-  product_id: number;
-  product_name: string;
-  product_code: string;
-  root_category: number;
-  root_category_name: string;
-  category: number;
-  product_cat_name: string;
-  vol: string;
-  ctn_size: number;
-  pqty_in_ctn: number;
-  pqty_in_pcs: number;
-  line_total: string;
-  ctn_price: string;
-  pcs_price: string;
-  image: string;
 }
 
 export interface RetailInvoiceDetailsType extends RetailInvoiceType {

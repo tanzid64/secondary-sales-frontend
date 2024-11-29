@@ -82,7 +82,7 @@ const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       {/* Header */}
-      {/* <Text style={styles.header}>East Repair Inc.</Text> */}
+      <Text style={styles.header}>Invoice</Text>
 
       {/* Company Info */}
       <View style={styles.companyInfo}>

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router";
 import InvoiceDetails from "./pages/invoice-details";
-import PrintPdf from "./pages/print-pdf";
+import PrintInvoicePDF from "./pages/print-invoice-pdf";
 import RetailInvoicesPage from "./pages/retail-invoices";
 import { RetailOrderPage } from "./pages/retail-order";
 import RetailOrderDetailsPage from "./pages/retail-order-details";
@@ -9,6 +9,7 @@ import SalesReturnDetails from "./pages/sales-return-details";
 import SalesReturn from "./pages/sales-return-page";
 import SignIn from "./pages/sign-in";
 import ProtectedRouteProvider from "./providers/protected-routes";
+import PrintOrderPDF from "./pages/print-order-pdf";
 
 const App: FC = () => {
   return (
@@ -24,9 +25,13 @@ const App: FC = () => {
           path="/retail-order-details/:id"
           element={<RetailOrderDetailsPage />}
         />
+        <Route path="/retail-order-print/:id" element={<PrintOrderPDF />} />
         <Route path="/retail-invoices" element={<RetailInvoicesPage />} />
         <Route path="/retail-invoices/:id" element={<InvoiceDetails />} />
-        <Route path="/retail-invoices-print/:id" element={<PrintPdf />} />
+        <Route
+          path="/retail-invoices-print/:id"
+          element={<PrintInvoicePDF />}
+        />
         <Route path="/sales-return" element={<SalesReturn />} />
         <Route
           path="/sales-return-details/:id"

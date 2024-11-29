@@ -1,4 +1,4 @@
-import InvoicePDF from "@/components/invoice/pdf-renderer";
+import InvoicePDF from "@/components/invoice-pdf-renderer";
 import { Loader } from "@/components/loader";
 import { axiosInstance } from "@/lib/axios";
 import { PDFViewer } from "@react-pdf/renderer";
@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import { useParams } from "react-router";
 
-const PrintPdf: FC = () => {
+const PrintInvoicePDF: FC = () => {
   const params = useParams();
   const { id } = params;
   const { data: invoice, isFetching } = useQuery({
@@ -28,4 +28,4 @@ const PrintPdf: FC = () => {
   );
 };
 
-export default PrintPdf;
+export default PrintInvoicePDF;

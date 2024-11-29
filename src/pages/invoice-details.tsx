@@ -1,4 +1,4 @@
-import InvoicePDF from "@/components/invoice/pdf-renderer";
+import InvoicePDF from "@/components/invoice-pdf-renderer";
 import { Loader } from "@/components/loader";
 import { buttonVariants } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
