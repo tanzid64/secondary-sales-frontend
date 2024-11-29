@@ -1,7 +1,9 @@
 import { axiosInstance } from "@/lib/axios";
+import { removeTokenCookie } from "@/lib/handle-cookie";
 import { UserType } from "@/lib/types";
 import { User2Icon } from "lucide-react";
 import { FC } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { Button, buttonVariants } from "./ui/button";
 import {
   DropdownMenu,
@@ -11,8 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { NavLink, useLocation, useNavigate } from "react-router";
-import { removeTokenCookie } from "@/lib/handle-cookie";
 
 interface NavbarProps {
   user: UserType;
@@ -20,6 +20,7 @@ interface NavbarProps {
 
 export const Navbar: FC<NavbarProps> = ({ user }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Fetch user information
 
@@ -35,7 +36,21 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
       console.log(error);
     }
   };
-  const location = useLocation();
+  const orderMatch =
+    location.pathname.startsWith("/retail-order-details") ||
+    location.pathname.startsWith("/retail-order-print") ||
+    location.pathname === "/retail-orders";
+
+  const invoiceMatch =
+    location.pathname.startsWith("/retail-invoices-print") ||
+    location.pathname.startsWith("/retail-invoices") ||
+    location.pathname === "/retail-invoices";
+
+  const salesReturnMatch =
+    location.pathname.startsWith("/sales-return-print") ||
+    location.pathname.startsWith("/sales-return-details") ||
+    location.pathname === "/sales-return";
+
   return (
     <nav className="border-b h-12 my-2 sticky top-0 w-full shadow-sm ">
       <div className="flex items-center justify-between ">
@@ -45,12 +60,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
               to="/retail-orders"
               className={buttonVariants({
                 size: "lg",
-                variant:
-                  location.pathname === "/retail-orders" ? "outline" : "link",
-                className:
-                  location.pathname === "/retail-orders"
-                    ? "font-bold border-accent-foreground"
-                    : "",
+                variant: orderMatch ? "outline" : "link",
               })}
             >
               Orders
@@ -61,12 +71,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
               to="/retail-invoices"
               className={buttonVariants({
                 size: "lg",
-                variant:
-                  location.pathname === "/retail-invoices" ? "outline" : "link",
-                className:
-                  location.pathname === "/retail-invoices"
-                    ? "font-bold border-accent-foreground"
-                    : "",
+                variant: invoiceMatch ? "outline" : "link",
               })}
             >
               Invoices
@@ -77,11 +82,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
               to="/sales-return"
               className={buttonVariants({
                 size: "lg",
-                variant: location.pathname === "/sales-return" ? "outline" : "link",
-                className:
-                  location.pathname === "/sales-return"
-                    ? "font-bold border-accent-foreground"
-                    : "",
+                variant: salesReturnMatch ? "outline" : "link",
               })}
             >
               Sales Return

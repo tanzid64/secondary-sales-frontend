@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router";
-import InvoiceDetails from "./pages/invoice-details";
+import InvoiceDetails from "./pages/retail-invoice-details";
 import PrintInvoicePDF from "./pages/print-invoice-pdf";
 import PrintOrderPDF from "./pages/print-order-pdf";
 import PrintSalesReturnPDF from "./pages/print-sales-return-pdf";

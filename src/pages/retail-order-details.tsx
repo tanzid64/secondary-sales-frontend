@@ -124,30 +124,30 @@ const RetailOrderDetailsPage: FC = () => {
             <tfoot className="bg-gray-100">
               <tr>
                 <td colSpan={3}></td>
-                <td className="font-bold px-2 py-1">Grand Total</td>
+                <td  className="font-bold px-10 py-1 text-end
+                ">Grand Total</td>
                 <td>{data.grand_tot}</td>
               </tr>
               <tr>
                 <td colSpan={3}></td>
-                <td className="font-bold px-2 py-1">Discount</td>
+                <td  className="font-bold px-10 py-1 text-end
+                ">Discount</td>
                 <td>{data.discount}</td>
               </tr>
               <tr>
                 <td colSpan={3}></td>
-                <td className="font-bold px-2 py-1">Special Discount</td>
+                <td  className="font-bold px-10 py-1 text-end
+                ">Special Discount</td>
                 <td>{data.special_discount}</td>
               </tr>
               <tr>
                 <td colSpan={3}></td>
-                <td className="font-bold px-2 py-1">Total Payable</td>
+                <td  className="font-bold px-10 py-1 text-end
+                ">Total Payable</td>
                 <td>{data.total_payable}</td>
               </tr>
             </tfoot>
           </table>
-        </div>
-        {/* Signature */}
-        <div className="mt-16 flex flex-col w-full  items-end">
-          <p className="border-t p-2">Authorized Signature</p>
         </div>
       </div>
     </Loader>
