@@ -76,3 +76,19 @@ export interface RetailInvoiceDetailsType extends RetailInvoiceType {
   product_details: ProductDetailType[];
   offer_details: any[];
 }
+
+export interface SalesReturnType {
+  id: number;
+  sr_number: string;
+  inv_number: string;
+  return_date: Date;
+  grand_tot: string;
+  discount: string;
+  special_discount: string;
+  outlet_id: number;
+  outlet_name: string;
+  outlet_code: string;
+  distributor_id: number;
+  distributor_name: string;
+  distributor_code: string;
+}
