@@ -110,7 +110,7 @@ const SalesReturn: FC = () => {
               variant={"link"}
               className="text-green-500 hover:text-green-600"
               onClick={() => {
-                navigate(`/retail-invoices/${row.getValue("id")}`);
+                navigate(`/sales-return-details/${row.getValue("id")}`);
               }}
             >
               <EyeIcon className="h-4 w-4" />
@@ -166,8 +166,8 @@ const SalesReturn: FC = () => {
       <CardHeader className="">
         <div className="flex items-center justify-between">
           <div className="">
-            <CardTitle>Retail Invoices</CardTitle>
-            <CardDescription>Manage your invoices and orders</CardDescription>
+            <CardTitle>Sales Returns</CardTitle>
+            <CardDescription>Manage your sales return report</CardDescription>
           </div>
           <div className="max-w-1/2 flex gap-2">
             <div className="relative">
