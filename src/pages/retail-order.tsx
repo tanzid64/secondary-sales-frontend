@@ -1,4 +1,5 @@
 import { DataTable } from "@/components/data-table";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,13 +22,12 @@ import { cn } from "@/lib/utils";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { ColumnDef } from "@tanstack/react-table";
 import { debounce } from "lodash";
-import { Loader2, X } from "lucide-react";
+import { EyeIcon, Loader2, X } from "lucide-react";
 import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 
-interface RetailOrderPageProps {}
-
-export const RetailOrderPage: FC<RetailOrderPageProps> = ({}) => {
+export const RetailOrderPage: FC = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams({});
   useEffect(() => {
     setSearchParams({});
@@ -120,6 +120,25 @@ export const RetailOrderPage: FC<RetailOrderPageProps> = ({}) => {
             {row.getValue("dlv_status")}
           </span>
         ),
+      },
+      {
+        accessorKey: "id",
+        header: "Action",
+        cell: ({ row }) => (
+          <div className="flex items-center gap-2">
+            <Button
+              variant={"link"}
+              className="text-green-500 hover:text-green-600"
+              onClick={() => {
+                navigate(`/retail-order-details/${row.getValue("id")}`);
+              }}
+            >
+              <EyeIcon className="h-4 w-4" />
+            </Button>
+          </div>
+        ),
+        enableSorting: false,
+        enableHiding: false,
       },
     ],
     [],

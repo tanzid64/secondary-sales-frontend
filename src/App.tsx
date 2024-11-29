@@ -9,6 +9,7 @@ import SalesReturnDetails from "./pages/sales-return-details";
 import SalesReturn from "./pages/sales-return-page";
 import SignIn from "./pages/sign-in";
 import ProtectedRouteProvider from "./providers/protected-routes";
+import RetailOrderDetailsPage from "./pages/retail-order-details";
 
 const App: FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: FC = () => {
       <Route element={<ProtectedRouteProvider />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/retail-orders" element={<RetailOrderPage />} />
+        <Route path="/retail-order-details/:id" element={<RetailOrderDetailsPage />} />
         <Route path="/retail-invoices" element={<RetailInvoicesPage />} />
         <Route path="/retail-invoices/:id" element={<InvoiceDetails />} />
         <Route path="/retail-invoices-print/:id" element={<PrintPdf />} />
