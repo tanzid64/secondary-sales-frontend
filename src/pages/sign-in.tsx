@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { axiosInstance } from "@/lib/axios";
 import { EyeIcon, EyeOffIcon, LogIn } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 const SignIn: FC = () => {

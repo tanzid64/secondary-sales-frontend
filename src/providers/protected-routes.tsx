@@ -3,7 +3,7 @@ import { Navbar } from "@/components/nav-bar";
 import { axiosInstance } from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router";
 
 interface ProtectedRouteProviderProps {
   redirectPath?: string; // Optional redirect path
