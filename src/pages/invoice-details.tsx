@@ -70,7 +70,8 @@ const InvoiceDetails: FC = () => {
           <div className="space-y-2">
             <p className="text-lg">Invoice Info:</p>
             <p>
-              Inv Issue: {format(new Date(invoice.inv_date), "MMMM dd, yyyy")}
+              Inv Issue:{" "}
+              {format(new Date(invoice.inv_date), "MMMM dd, yyyy 'at' h:mm a")}
             </p>
             <p>Invoice No: {invoice.inv_number}</p>
             <p>Order No: {invoice.ord_number}</p>

@@ -92,3 +92,8 @@ export interface SalesReturnType {
   distributor_name: string;
   distributor_code: string;
 }
+
+export interface SalesReturnDetailsType extends SalesReturnType {
+  amount_after_discount: number;
+  product_details: ProductDetailType[];
+}
