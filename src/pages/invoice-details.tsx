@@ -1,6 +1,6 @@
 import InvoicePDF from "@/components/invoice/pdf-renderer";
 import { Loader } from "@/components/loader";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
 import { ProductDetailType } from "@/lib/types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -8,12 +8,12 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { DownloadIcon, PrinterIcon } from "lucide-react";
 import { FC } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 const InvoiceDetails: FC = () => {
   const params = useParams();
   const { id } = params;
 
-  const { data: invoice, isLoading } = useQuery({
+  const { data: invoice, isFetching } = useQuery({
     queryKey: ["invoice", id],
     queryFn: async () => {
       const res = await axiosInstance.get(
@@ -23,13 +23,13 @@ const InvoiceDetails: FC = () => {
     },
   });
 
-  // const handlePrint = async () => {
-  //   return <PDFViewer document={<InvoicePDF invoice={invoice} />} />;
-  // };
+  if (!invoice) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <Loader isLoading={isLoading}>
-      <div className="w-full h-full p-8 text-sm leading-1">
+    <Loader isLoading={isFetching}>
+      <div className="w-full h-full px-8 text-sm leading-1">
         {/* Header */}
         <div className=" flex justify-between items-start">
           {/* Company Info */}
@@ -52,16 +52,17 @@ const InvoiceDetails: FC = () => {
               <span>Save</span>
             </PDFDownloadLink>
 
-            <Button
+            <Link
+              to={`/retail-invoices-print/${id}`}
+              target="_blank"
               className={buttonVariants({
                 size: "sm",
                 variant: "secondary",
               })}
-              // onClick={handlePrint}
             >
               <PrinterIcon className="size-4" />
               <span>Print</span>
-            </Button>
+            </Link>
           </div>
         </div>
 

@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { NavLink, useLocation, useNavigate } from "react-router";
+import { removeTokenCookie } from "@/lib/handle-cookie";
 
 interface NavbarProps {
   user: UserType;
@@ -27,7 +28,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
       const res = await axiosInstance.post("/api/logout");
       console.log(res);
       if (res.status === 200) {
-        localStorage.removeItem("token");
+        removeTokenCookie();
         navigate("/sign-in");
       }
     } catch (error) {

@@ -1,6 +1,7 @@
 import { Loader } from "@/components/loader";
 import { Navbar } from "@/components/nav-bar";
 import { axiosInstance } from "@/lib/axios";
+import { accessCookie } from "@/lib/handle-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import { Navigate, Outlet } from "react-router";
@@ -12,7 +13,7 @@ interface ProtectedRouteProviderProps {
 const ProtectedRouteProvider: FC<ProtectedRouteProviderProps> = ({
   redirectPath = "/sign-in", // Default redirect path
 }) => {
-  const isAuthenticated = Boolean(localStorage.getItem("token")); // Ensure token is truthy
+  const isAuthenticated = Boolean(accessCookie());
   const { data: user, isFetching } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { accessCookie } from "./handle-cookie";
 
 export const axiosInstance = axios.create({
   baseURL: "https://secondarydev.goldengroup-bd.com",
@@ -9,7 +10,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = accessCookie();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

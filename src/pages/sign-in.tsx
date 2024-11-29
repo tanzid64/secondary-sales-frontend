@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { axiosInstance } from "@/lib/axios";
+import { setTokenCookie } from "@/lib/handle-cookie";
 import { EyeIcon, EyeOffIcon, LogIn } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
@@ -38,6 +39,7 @@ const SignIn: FC = () => {
       console.log(res);
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token);
+        setTokenCookie(res.data.token, res.data.expires_in);
         navigate("/");
         toast("Sign in successful");
       }
