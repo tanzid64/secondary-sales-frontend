@@ -57,15 +57,25 @@ const styles = StyleSheet.create({
   },
   noBorderRow: {
     flexDirection: "row",
-    padding: 5,
+    padding: 3,
     alignItems: "center",
   },
   noBorderCell: {
     flex: 1,
     textAlign: "center",
-    padding: 2,
+    padding: 0,
+
     alignItems: "flex-end",
   },
+  rightAlignedCell: {
+    flex: 1,
+    textAlign: "right",
+    padding: 2,
+    paddingRight: 0,
+    alignItems: "flex-end",
+  },
+
+
 });
 
 const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
@@ -86,7 +96,8 @@ const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
         <View>
           <Text style={styles.boldText}>Invoice Info:</Text>
           <Text>
-            Inv Issue: {format(new Date(invoice.inv_date), "MMMM dd, yyyy")}
+            Inv Issue:{" "}
+            {format(new Date(invoice.inv_date), "MMMM dd, yyyy 'at' h:mm a")}
           </Text>
           <Text>Inv No: {invoice.inv_number}</Text>
           <Text>Challan No: {invoice.challan_number}</Text>
@@ -128,25 +139,25 @@ const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
         <View style={styles.noBorderRow}>
           <Text style={styles.noBorderCell} />
           <Text style={styles.noBorderCell} />
-          <Text style={styles.noBorderCell}>Grand Total</Text>
+          <Text style={styles.rightAlignedCell}>Grand Total</Text>
           <Text style={styles.noBorderCell}>{invoice.grand_tot}</Text>
         </View>
         <View style={styles.noBorderRow}>
           <Text style={styles.noBorderCell} />
           <Text style={styles.noBorderCell} />
-          <Text style={styles.noBorderCell}>Discount</Text>
+          <Text style={styles.rightAlignedCell}>Discount</Text>
           <Text style={styles.noBorderCell}>{invoice.discount}</Text>
         </View>
         <View style={styles.noBorderRow}>
           <Text style={styles.noBorderCell} />
           <Text style={styles.noBorderCell} />
-          <Text style={styles.noBorderCell}>Special Discount</Text>
+          <Text style={styles.rightAlignedCell}>Special Discount</Text>
           <Text style={styles.noBorderCell}>{invoice.special_discount}</Text>
         </View>
         <View style={styles.noBorderRow}>
           <Text style={styles.noBorderCell} />
           <Text style={styles.noBorderCell} />
-          <Text style={styles.noBorderCell}>Total Payable</Text>
+          <Text style={styles.rightAlignedCell}>Total Payable</Text>
           <Text style={styles.noBorderCell}>{invoice.total_payable}</Text>
         </View>
       </View>
@@ -154,7 +165,6 @@ const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
       {/* Footer */}
       <View style={styles.footer}>
         <Text>Terms & Conditions</Text>
-        <Text>Payment is due within 15 days</Text>
         <Text>Please make checks payable to: {invoice.outlet_name}</Text>
       </View>
 

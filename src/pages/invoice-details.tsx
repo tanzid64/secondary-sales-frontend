@@ -156,7 +156,6 @@ const InvoiceDetails: FC = () => {
         {/* Footer */}
         <div className="mt-8 flex flex-col w-full justify-center items-center">
           <p>Terms & conditions</p>
-          <p>Payment is due within 15 days</p>
           <p>Please make checks payable to: {invoice.outlet_name}</p>
         </div>
         {/* Signature */}
