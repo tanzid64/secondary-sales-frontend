@@ -52,62 +52,69 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
     location.pathname === "/sales-return";
 
   return (
-    <nav className="border-b h-12 my-2 sticky top-0 w-full shadow-sm ">
-      <div className="flex items-center justify-between ">
-        <ul className="flex items-center justify-center gap-4 mx-auto">
-          <li>
-            <NavLink
-              to="/retail-orders"
-              className={buttonVariants({
-                size: "lg",
-                variant: orderMatch ? "outline" : "link",
-              })}
-            >
-              Orders
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/retail-invoices"
-              className={buttonVariants({
-                size: "lg",
-                variant: invoiceMatch ? "outline" : "link",
-              })}
-            >
-              Invoices
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/sales-return"
-              className={buttonVariants({
-                size: "lg",
-                variant: salesReturnMatch ? "outline" : "link",
-              })}
-            >
-              Sales Return
-            </NavLink>
-          </li>
-        </ul>
-        <div className="pr-5">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild className="">
-              <Button variant="outline" size="icon" className="rounded-full">
-                <User2Icon />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-76">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuLabel>
-                User Type: {user?.user_type}
-              </DropdownMenuLabel>
-              <DropdownMenuLabel>Name: {user?.name}</DropdownMenuLabel>
-              <DropdownMenuLabel>Email: {user.email}</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+    <nav
+      className="border-b h-16   sticky top-0 w-full shadow-sm bg-background
+    "
+    >
+      <div className="pt-3">
+        <div className="flex items-center justify-between ">
+          <ul className="flex items-center justify-center gap-4 mx-auto">
+            <li>
+              <NavLink
+                to="/retail-orders"
+                className={buttonVariants({
+                  size: "lg",
+                  variant: orderMatch ? "outline" : "link",
+                })}
+              >
+                Orders
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/retail-invoices"
+                className={buttonVariants({
+                  size: "lg",
+                  variant: invoiceMatch ? "outline" : "link",
+                })}
+              >
+                Invoices
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/sales-return"
+                className={buttonVariants({
+                  size: "lg",
+                  variant: salesReturnMatch ? "outline" : "link",
+                })}
+              >
+                Sales Return
+              </NavLink>
+            </li>
+          </ul>
+          <div className="pr-5">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="">
+                <Button variant="outline" size="icon" className="rounded-full">
+                  <User2Icon />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-76">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>
+                  User Type: {user?.user_type}
+                </DropdownMenuLabel>
+                <DropdownMenuLabel>Name: {user?.name}</DropdownMenuLabel>
+                <DropdownMenuLabel>Email: {user.email}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout}>
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
     </nav>
