@@ -161,10 +161,10 @@ const SalesReturn: FC = () => {
     setSearchQuery((prev) => ({ ...prev, search: value }));
     debounceSearch(value);
   };
-  return  (
+  return (
     <Card className="border-none shadow-none">
       <CardHeader className="">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-5 md:flex-row md:justify-between">
           <div className="">
             <CardTitle>Sales Returns</CardTitle>
             <CardDescription>Manage your sales return report</CardDescription>
@@ -173,7 +173,7 @@ const SalesReturn: FC = () => {
             <div className="relative">
               <Input
                 placeholder="Search ..."
-                className="w-[300px]"
+                className="w-full md:w-[300px]"
                 value={searchQuery.search}
                 onChange={handleSearchChange}
               />

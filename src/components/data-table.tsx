@@ -47,7 +47,7 @@ export const DataTable: FC<DataTableProps<any>> = ({
     pageCount: 1,
   });
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto ">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

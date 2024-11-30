@@ -8,6 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { axiosInstance } from "@/lib/axios";
 import { RetailInvoiceType } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -24,21 +32,28 @@ const RetailInvoicesPage: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams({});
   useEffect(() => {
     setSearchParams({});
-    setSearchQuery({ cursor: "", search: "" });
+    setSearchQuery({ cursor: "", search: "", status: "" });
   }, []);
 
   const [searchQuery, setSearchQuery] = useState({
     cursor: searchParams.get("cursor") || "",
     search: searchParams.get("search") || "",
+    status: searchParams.get("status") || "",
   });
 
   // Fetch Invoices
   const { data: retailInvoiceData, isFetching } = useQuery({
-    queryKey: ["retail-order", searchQuery.cursor, searchQuery.search],
+    queryKey: [
+      "retail-order",
+      searchQuery.cursor,
+      searchQuery.search,
+      searchQuery.status,
+    ],
     queryFn: async () => {
       const params = new URLSearchParams({
         cursor: searchQuery.cursor,
         search: searchQuery.search,
+        status: searchQuery.status,
       });
 
       const res = await axiosInstance.get(
@@ -222,21 +237,29 @@ const RetailInvoicesPage: FC = () => {
     debounceSearch(value);
   };
 
-  // filtering
+  const handleStatusChange = (value: string) => {
+    setSearchQuery((prev) => ({ ...prev, status: value }));
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+      params.set("status", value);
+      params.delete("cursor");
+      return params;
+    });
+  };
 
   return (
     <Card className="border-none shadow-none">
       <CardHeader className="">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-5 md:flex-row md:justify-between">
           <div className="">
             <CardTitle>Retail Invoices</CardTitle>
             <CardDescription>Manage your invoices and orders</CardDescription>
           </div>
-          <div className="max-w-1/2 flex gap-2">
+          <div className=" flex flex-col gap-5 md:flex-row">
             <div className="relative">
               <Input
                 placeholder="Search ..."
-                className="w-[300px]"
+                className="w-full md:w-[180px]"
                 value={searchQuery.search}
                 onChange={handleSearchChange}
               />
@@ -256,6 +279,21 @@ const RetailInvoicesPage: FC = () => {
                 />
               )}
             </div>
+            <Select onValueChange={handleStatusChange}>
+              <SelectTrigger className="w-full md:w-[180px]">
+                <SelectValue placeholder="Filter by status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="delivered">Delivered</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="cancelled">Cancelled</SelectItem>
+                  <SelectItem value="not_delivered">Not Delivered</SelectItem>
+
+                  <SelectItem value="All">Default</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </CardHeader>

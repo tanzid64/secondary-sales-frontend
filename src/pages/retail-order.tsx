@@ -194,18 +194,18 @@ export const RetailOrderPage: FC = () => {
   };
 
   return (
-    <Card className="border-none shadow-none">
+    <Card className="border-none shadow-none overflow-x-hidden">
       <CardHeader className="">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-5 md:flex-row md:justify-between">
           <div className="">
             <CardTitle>Retail Orders</CardTitle>
             <CardDescription>Manage your retail orders</CardDescription>
           </div>
-          <div className="max-w-1/2 flex gap-2">
+          <div className=" flex flex-col gap-5 md:flex-row">
             <div className="relative">
               <Input
                 placeholder="Search ..."
-                className="w-[300px]"
+                className="w-full md:w-[180px]"
                 value={searchQuery.search}
                 onChange={handleSearchChange}
               />
@@ -226,7 +226,7 @@ export const RetailOrderPage: FC = () => {
               )}
             </div>
             <Select onValueChange={handleStatusChange}>
-              <SelectTrigger className="w-[200px]">
+              <SelectTrigger className="w-full md:w-[180px]">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
@@ -234,9 +234,7 @@ export const RetailOrderPage: FC = () => {
                   <SelectItem value="delivered">Delivered</SelectItem>
                   <SelectItem value="pending">Pending</SelectItem>
                   <SelectItem value="cancelled">Cancelled</SelectItem>
-                  <SelectItem value="due">Due</SelectItem>
-                  <SelectItem value="paid">Paid</SelectItem>
-                  <SelectItem value="All">All</SelectItem>
+                  <SelectItem value="All">Default</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -244,7 +242,7 @@ export const RetailOrderPage: FC = () => {
         </div>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="">
         <DataTable
           columns={columns}
           data={retailOrderData?.data?.data || []}
