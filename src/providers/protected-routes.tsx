@@ -1,7 +1,7 @@
 import { Loader } from "@/components/loader";
 import { Navbar } from "@/components/nav-bar";
 import { axiosInstance } from "@/lib/axios";
-import { accessCookie } from "@/lib/handle-cookie";
+import { cookieManager } from "@/lib/handle-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import { Navigate, Outlet } from "react-router";
@@ -13,7 +13,12 @@ interface ProtectedRouteProviderProps {
 const ProtectedRouteProvider: FC<ProtectedRouteProviderProps> = ({
   redirectPath = "/sign-in", // Default redirect path
 }) => {
-  const isAuthenticated = Boolean(accessCookie());
+  const isAuthenticated = cookieManager.getCookie("authToken");
+
+  if (!isAuthenticated) {
+    return <Navigate to={redirectPath} replace />;
+  }
+
   const { data: user, isFetching } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
@@ -21,10 +26,6 @@ const ProtectedRouteProvider: FC<ProtectedRouteProviderProps> = ({
       return res.data;
     },
   });
-
-  if (!isAuthenticated) {
-    return <Navigate to={redirectPath} replace />;
-  }
 
   return (
     <Loader isLoading={isFetching}>

@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { axiosInstance } from "@/lib/axios";
-import { accessCookie, setTokenCookie } from "@/lib/handle-cookie";
+import { cookieManager } from "@/lib/handle-cookie";
 import { EyeIcon, EyeOffIcon, LogIn } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
@@ -21,7 +21,7 @@ const SignIn: FC = () => {
   const phoneInputRef = useRef<HTMLInputElement | null>(null);
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
-  const isAuthenticated = Boolean(accessCookie());
+  const isAuthenticated = cookieManager.getCookie("authToken");
 
   // Focus on phone input when the page reloads
   useEffect(() => {
@@ -40,8 +40,11 @@ const SignIn: FC = () => {
       });
       console.log(res);
       if (res.status === 200) {
-        localStorage.setItem("token", res.data.token);
-        setTokenCookie(res.data.token, res.data.expires_in);
+        cookieManager.setCookie(
+          "authToken",
+          res.data.token,
+          res.data.expires_in,
+        );
         navigate("/");
         toast("Sign in successful");
       }

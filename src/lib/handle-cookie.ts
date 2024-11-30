@@ -1,13 +1,32 @@
-import Cookies from "js-cookie";
+import Cookies from "universal-cookie";
 
-export const setTokenCookie = (token: string, expires: number) => {
-  Cookies.set('authToken', token, {expires});
+class CookieManager {
+  private cookie: Cookies;
+
+  constructor() {
+    this.cookie = new Cookies();
+  }
+
+  // Set cookie with token and expiration in seconds
+  setCookie(name: string, value: string, expInSec: number) {
+    const expirationDate = new Date();
+    expirationDate.setSeconds(expirationDate.getSeconds() + expInSec); 
+
+    this.cookie.set(name, value, {
+      path: "/",
+      maxAge: expInSec
+    });
+  }
+
+  // Get cookie value by name
+  getCookie(name: string): string | undefined {
+    return this.cookie.get(name); 
+  }
+
+  // Remove cookie by name
+  removeCookie(name: string) {
+    this.cookie.remove(name, { path: "/" });
+  }
 }
 
-export const removeTokenCookie = () => {
-  Cookies.remove('authToken');
-}
-
-export const accessCookie = () => {
-  return Cookies.get('authToken');
-}
+export const cookieManager = new CookieManager()

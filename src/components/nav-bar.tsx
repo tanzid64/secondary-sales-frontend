@@ -1,5 +1,4 @@
 import { axiosInstance } from "@/lib/axios";
-import { removeTokenCookie } from "@/lib/handle-cookie";
 import { UserType } from "@/lib/types";
 import { MenuIcon, User2Icon } from "lucide-react";
 import { FC } from "react";
@@ -14,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
+import { cookieManager } from "@/lib/handle-cookie";
 
 interface NavbarProps {
   user: UserType;
@@ -30,13 +30,14 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
       const res = await axiosInstance.post("/api/logout");
       console.log(res);
       if (res.status === 200) {
-        removeTokenCookie();
+        cookieManager.removeCookie("authToken");
         navigate("/sign-in");
       }
     } catch (error) {
       console.log(error);
     }
   };
+  
   if (!user) {
     return null;
   }
