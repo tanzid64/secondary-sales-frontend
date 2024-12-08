@@ -186,7 +186,7 @@ export const PDFInfoTable: FC<PDFInfoTableProps> = ({
       <View style={styles.noBorderRow}>
         <Text style={styles.noBorderCell} />
         <Text style={styles.noBorderCell} />
-        <Text style={styles.rightAlignedCell}>সর্বমোট</Text>
+        <Text style={styles.rightAlignedCell}>সর্বমোট</Text>
         <Text style={styles.noBorderCell}>{convertNumbers(grand_tot)}</Text>
       </View>
       <View style={styles.noBorderRow}>

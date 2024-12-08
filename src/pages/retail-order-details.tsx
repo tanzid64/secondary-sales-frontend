@@ -1,8 +1,8 @@
+import { DetailsTable } from "@/components/details-table";
 import { Loader } from "@/components/loader";
 import OrderPDF from "@/components/order-pdf-renderer";
 import { buttonVariants } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
-import { ProductDetailType } from "@/lib/types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -86,68 +86,13 @@ const RetailOrderDetailsPage: FC = () => {
 
         {/* Product Details */}
         <div className="mt-8">
-          <table className="table-auto w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border border-gray-300 px-2 py-1">
-                  Product Code
-                </th>
-                <th className="border border-gray-300 px-2 py-1">
-                  Product Name
-                </th>
-                <th className="border border-gray-300 px-2 py-1">Unit Price</th>
-                <th className="border border-gray-300 px-2 py-1">Qty</th>
-                <th className="border border-gray-300 px-2 py-1">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.product_details.map((product: ProductDetailType) => (
-                <tr key={product.product_code}>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.product_code}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.product_name}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.ctn_price}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.pqty_in_ctn}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.line_total}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-            <tfoot className="bg-gray-100">
-              <tr>
-                <td colSpan={3}></td>
-                <td  className="font-bold px-10 py-1 text-end
-                ">Grand Total</td>
-                <td>{data.grand_tot}</td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td  className="font-bold px-10 py-1 text-end
-                ">Discount</td>
-                <td>{data.discount}</td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td  className="font-bold px-10 py-1 text-end
-                ">Special Discount</td>
-                <td>{data.special_discount}</td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td  className="font-bold px-10 py-1 text-end
-                ">Total Payable</td>
-                <td>{data.total_payable}</td>
-              </tr>
-            </tfoot>
-          </table>
+          <DetailsTable
+            products={data.product_details}
+            grandTotal={data.grand_tot}
+            discount={data.discount}
+            specialDiscount={data.special_discount}
+            totalPayable={data.total_payable}
+          />
         </div>
       </div>
     </Loader>

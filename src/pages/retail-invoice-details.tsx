@@ -1,9 +1,9 @@
+import { DetailsTable } from "@/components/details-table";
 import InvoicePDF from "@/components/invoice-pdf-renderer";
 import { Loader } from "@/components/loader";
 import { buttonVariants } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
 import { convertNumbers } from "@/lib/convert-numbers";
-import { ProductDetailType } from "@/lib/types";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -108,82 +108,15 @@ const InvoiceDetails: FC = () => {
 
         {/* Product Details */}
         <div className="mt-8">
-          <table className="table-auto w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="th-header">পণ্যের কোড</th>
-                <th className="th-header">পণ্যের নাম</th>
-                <th className="th-header">প্রতি ইউনিট মূল্য</th>
-                <th className="th-header">পরিমাণ</th>
-                <th className="th-header">মূল্য</th>
-              </tr>
-            </thead>
-            <tbody>
-              {invoice.product_details.map((product: ProductDetailType) => (
-                <tr key={product.product_code}>
-                  <td className="td">{convertNumbers(product.product_code)}</td>
-                  <td className="td">{product.product_name}</td>
-                  <td className="td">{convertNumbers(product.ctn_price)}</td>
-                  <td className="td">{convertNumbers(product.pqty_in_ctn)}</td>
-                  <td className="td">{convertNumbers(product.line_total)}</td>
-                </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan={3}></td>
-                <td
-                  className="tfooter
-                "
-                >
-                  সর্বমোট
-                </td>
-                <td className="tfooter-content">
-                  {convertNumbers(invoice.grand_tot)}
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td
-                  className="tfooter
-                "
-                >
-                  ডিসকাঊন্ট
-                </td>
-                <td className="tfooter-content">
-                  {convertNumbers(invoice.discount)}
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td
-                  className="tfooter
-                "
-                >
-                  বিশেষ ডিসকাঊন্ট
-                </td>
-                <td className="tfooter-content">
-                  {convertNumbers(invoice.special_discount)}
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td
-                  className="tfooter
-                "
-                >
-                  মোট টাকা
-                </td>
-                <td className="tfooter-content">
-                  {convertNumbers(invoice.total_payable)}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+          <DetailsTable
+            products={invoice.product_details}
+            grandTotal={invoice.grand_tot}
+            discount={invoice.discount}
+            specialDiscount={invoice.special_discount}
+            totalPayable={invoice.total_payable}
+          />
         </div>
-
         {/* Footer */}
-
         <div className="mt-24 flex w-full items-center justify-between">
           <p className="tfooter-signature">বিক্রেতার স্বাক্ষর</p>
           <p className="tfooter-signature">ক্রেতার স্বাক্ষর</p>

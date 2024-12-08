@@ -1,12 +1,12 @@
+import { convertNumbers } from "@/lib/convert-numbers";
 import { RetailOrderDetailsType } from "@/lib/types";
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 import { format } from "date-fns";
+import { bn } from "date-fns/locale";
 import {
   PDFCompanyInfo,
-  PDFFooter,
   PDFHeader,
   PDFInfoTable,
-  PDFSignature,
   PDFStyles,
 } from "./pdf-renderer";
 
@@ -17,30 +17,25 @@ const OrderPDF = ({ order }: { order: RetailOrderDetailsType }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       {/* Header */}
-      <PDFHeader title="Order" />
+      <PDFHeader title="অর্ডার" />
 
       {/* Company Info */}
-      <PDFCompanyInfo
-        title="Company Info"
-        name={order.outlet_name}
-        id={order.outlet_id}
-      />
+      <PDFCompanyInfo title="ক্রেতার নাম" name={order.outlet_name} />
 
       {/* Bill To and Ship To */}
       <View style={styles.row}>
         <View>
-          <Text style={styles.boldText}>Order Info:</Text>
+          <Text style={styles.boldText}>অর্ডার তথ্যঃ</Text>
           <Text>
-            Ord Issue:{" "}
-            {format(new Date(order.ord_date), "MMMM dd, yyyy 'at' h:mm a")}
+            ইস্যু তারিখঃ{" "}
+            {convertNumbers(
+              format(new Date(order.ord_date), "PP", { locale: bn }),
+            )}
           </Text>
-          <Text>Order No: {order.ord_number}</Text>
+          <Text>
+            অর্ডার নংঃ <Text style={styles.fontRoboto}>{order.ord_number}</Text>
+          </Text>
         </View>
-      </View>
-
-      {/* Invoice Info */}
-      <View style={styles.row}>
-        <Text>Delivery Status: {order.dlv_status}</Text>
       </View>
 
       {/* Table */}
@@ -52,11 +47,8 @@ const OrderPDF = ({ order }: { order: RetailOrderDetailsType }) => (
         total_payable={order.total_payable}
       />
 
-      {/* Footer */}
-      <PDFFooter outlet_name={order.outlet_name} />
-
       {/* Signature */}
-      <PDFSignature />
+      {/* <PDFSignature /> */}
     </Page>
   </Document>
 );
