@@ -146,21 +146,27 @@ export const RetailOrderPage: FC = () => {
 
   const handleNextPage = () => {
     if (retailOrderData?.data?.next_cursor) {
+      const newCursor = retailOrderData.data.next_cursor;
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev);
-        params.set("cursor", retailOrderData.data.next_cursor);
+        params.set("cursor", newCursor);
         return params;
       });
+
+      setSearchQuery((prev) => ({ ...prev, cursor: newCursor }));
     }
   };
 
   const handlePrevPage = () => {
     if (retailOrderData?.data?.prev_cursor) {
+      const newCursor = retailOrderData.data.prev_cursor;
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev);
-        params.set("cursor", retailOrderData.data.prev_cursor);
+        params.set("cursor", newCursor);
         return params;
       });
+
+      setSearchQuery((prev) => ({ ...prev, cursor: newCursor }));
     }
   };
 

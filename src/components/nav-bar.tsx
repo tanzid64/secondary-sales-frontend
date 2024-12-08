@@ -59,7 +59,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
 
   return (
     <nav
-      className="border-b min-h-16   sticky top-0 w-full shadow-sm bg-background
+      className="border-b min-h-16 sticky top-0 w-full shadow-sm bg-background z-10
     "
     >
       <div className="py-3">

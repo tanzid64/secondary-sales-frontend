@@ -126,21 +126,27 @@ const SalesReturn: FC = () => {
 
   const handleNextPage = () => {
     if (salesReturnData?.data?.next_cursor) {
+      const newCursor = salesReturnData.data.next_cursor;
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev);
-        params.set("cursor", salesReturnData.data.next_cursor);
+        params.set("cursor", newCursor);
         return params;
       });
+
+      setSearchQuery((prev) => ({ ...prev, cursor: newCursor }));
     }
   };
 
   const handlePrevPage = () => {
     if (salesReturnData?.data?.prev_cursor) {
+      const newCursor = salesReturnData.data.prev_cursor;
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev);
-        params.set("cursor", salesReturnData.data.prev_cursor);
+        params.set("cursor", newCursor);
         return params;
       });
+
+      setSearchQuery((prev) => ({ ...prev, cursor: newCursor }));
     }
   };
 

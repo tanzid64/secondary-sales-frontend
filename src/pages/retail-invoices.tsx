@@ -185,21 +185,27 @@ const RetailInvoicesPage: FC = () => {
   // Handle Page change
   const handleNextPage = () => {
     if (retailInvoiceData?.data?.next_cursor) {
+      const newCursor = retailInvoiceData.data.next_cursor;
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev);
-        params.set("cursor", retailInvoiceData.data.next_cursor);
+        params.set("cursor", newCursor);
         return params;
       });
+
+      setSearchQuery((prev) => ({ ...prev, cursor: newCursor }));
     }
   };
 
   const handlePrevPage = () => {
     if (retailInvoiceData?.data?.prev_cursor) {
+      const newCursor = retailInvoiceData.data.prev_cursor;
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev);
-        params.set("cursor", retailInvoiceData.data.prev_cursor);
+        params.set("cursor", newCursor);
         return params;
       });
+
+      setSearchQuery((prev) => ({ ...prev, cursor: newCursor }));
     }
   };
 
