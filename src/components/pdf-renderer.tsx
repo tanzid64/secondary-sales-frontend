@@ -1,7 +1,8 @@
 import { convertNumbers } from "@/lib/convert-numbers";
 import { ProductDetailType } from "@/lib/types";
-import { Font, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { Font, StyleSheet, Text, View, Image } from "@react-pdf/renderer";
 import { FC } from "react";
+import Logo from "/savoy_logo.png";
 
 Font.register({
   family: "Roboto",
@@ -35,10 +36,22 @@ export const PDFStyles = StyleSheet.create({
   fontRoboto: {
     fontFamily: "Roboto",
   },
+  headerContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  logo: {
+    width: 70, // Adjust width
+    height: 70, // Adjust height
+  },
   header: {
     fontSize: 16,
-    marginBottom: 20,
     textAlign: "center",
+    flex: 1,
+    fontFamily: "Trio Bangla",
+    fontWeight: "bold",
   },
   companyInfo: {
     marginBottom: 20,
@@ -80,7 +93,7 @@ export const PDFStyles = StyleSheet.create({
     marginTop: 80,
     alignItems: "center",
     justifyContent: "space-between",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   noBorderRow: {
     flexDirection: "row",
@@ -108,8 +121,13 @@ export const PDFStyles = StyleSheet.create({
 
 const styles = PDFStyles;
 
-export const PDFHeader: FC<{ title: string }> = ({ title }) => {
-  return <Text style={styles.header}>{title}</Text>;
+export const PDFHeader: FC<{ title: string; }> = ({ title }) => {
+  return (
+    <View style={styles.headerContainer}>
+      <Image style={styles.logo} src={Logo} />
+      <Text style={styles.header}>{title}</Text>
+    </View>
+  );
 };
 
 export const PDFCompanyInfo: FC<{
