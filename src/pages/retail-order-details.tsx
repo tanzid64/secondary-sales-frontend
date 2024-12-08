@@ -3,9 +3,9 @@ import { Loader } from "@/components/loader";
 import OrderPDF from "@/components/order-pdf-renderer";
 import { buttonVariants } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
+import { banglaFormattedDate } from "@/lib/utils";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useQuery } from "@tanstack/react-query";
-import { format } from "date-fns";
 import { DownloadIcon, PrinterIcon } from "lucide-react";
 import { FC } from "react";
 import { Link, useParams } from "react-router";
@@ -37,7 +37,7 @@ const RetailOrderDetailsPage: FC = () => {
           {/* Company Info */}
           <div className="space-y-2">
             <p className="text-lg">ক্রেতার নামঃ</p>
-            <p className="font-bold">#{data.outlet_id}</p>
+            <p className="font-bold sr-only">#{data.outlet_id}</p>
             <p className="uppercase text-lg">{data.outlet_name}</p>
           </div>
           {/* Buttons */}
@@ -72,16 +72,16 @@ const RetailOrderDetailsPage: FC = () => {
           <div className="space-y-2">
             <p className="text-lg">অর্ডার তথ্যঃ </p>
             <p>
-              {" "}
-              {format(new Date(data?.ord_date), "MMMM dd, yyyy 'at' h:mm a")}
+              অর্ডার ইস্যুঃ {" "}
+              {banglaFormattedDate(data.ord_date)}
             </p>
-            <p>Order No: {data.ord_number}</p>
+            <p>অর্ডার নংঃ  {data.ord_number}</p>
           </div>
         </div>
 
         {/* Status */}
         <div className="flex justify-between items-center mt-8">
-          <p>Delivery Status: {data.dlv_status}</p>
+          <p>ডেলিভারী স্টাটাসঃ  {data.dlv_status}</p>
         </div>
 
         {/* Product Details */}

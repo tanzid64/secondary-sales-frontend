@@ -3,11 +3,9 @@ import { Loader } from "@/components/loader";
 import SalesReturnPDF from "@/components/sales-return-pdf-renderer";
 import { buttonVariants } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
-import { convertNumbers } from "@/lib/convert-numbers";
+import { banglaFormattedDate } from "@/lib/utils";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useQuery } from "@tanstack/react-query";
-import { format } from "date-fns";
-import { bn } from "date-fns/locale";
 import { DownloadIcon, PrinterIcon } from "lucide-react";
 import { FC } from "react";
 import { Link, useParams } from "react-router";
@@ -75,12 +73,7 @@ const SalesReturnDetails: FC = () => {
           {/* Invoice Info */}
           <div className="space-y-2">
             <p className="text-lg">রিটার্ন তথ্যঃ </p>
-            <p>
-              ইস্যু তারিখঃ{" "}
-              {convertNumbers(
-                format(new Date(data.return_date), "PP", { locale: bn }),
-              )}
-            </p>
+            <p>ইস্যু তারিখঃ {banglaFormattedDate(data.return_date)}</p>
             <p>
               ইনভয়েস নংঃ <span className="font-roboto"> {data.inv_number}</span>
             </p>

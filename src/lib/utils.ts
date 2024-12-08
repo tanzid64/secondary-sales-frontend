@@ -1,19 +1,13 @@
-import { clsx, type ClassValue } from "clsx"
-import { format } from "date-fns"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { format } from "date-fns";
 import { bn } from "date-fns/locale";
+import { twMerge } from "tailwind-merge";
+import { convertNumbers } from "./convert-numbers";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
-export const formatDate = (date: Date) => {
-  const formattedDatePart = format(date, "MMMM do, yyyy",{ locale: bn });
-  const intlFormatter = new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  });
-  const formattedTimePart = intlFormatter.format(date);
-  return `${formattedDatePart} ${formattedTimePart}`;
-}
+export const banglaFormattedDate = (date: Date | string) => {
+  return convertNumbers(format(new Date(date), "PP", { locale: bn }));
+};
