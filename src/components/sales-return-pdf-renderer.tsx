@@ -1,13 +1,13 @@
+import { convertNumbers } from "@/lib/convert-numbers";
 import { SalesReturnDetailsType } from "@/lib/types";
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 import { format } from "date-fns";
+import { bn } from "date-fns/locale";
 import {
   PDFCompanyInfo,
   PDFDistributor,
-  PDFFooter,
   PDFHeader,
   PDFInfoTable,
-  PDFSignature,
   PDFStyles,
 } from "./pdf-renderer";
 
@@ -17,28 +17,29 @@ const styles = PDFStyles;
 const SalesReturnPDF = ({ data }: { data: SalesReturnDetailsType }) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      <PDFHeader title="Sales Return" />
-      <PDFCompanyInfo
-        title="Company Info"
-        name={data.outlet_name}
-        id={data.outlet_id}
-      />
+      <PDFHeader title="সেলস রিটার্ন" />
+      <PDFCompanyInfo title="ক্রেতার নামঃ" name={data.outlet_name} />
 
       {/* Bill To and Ship To */}
       <View style={styles.row}>
         <View>
           <Text style={styles.boldText}>Return Info:</Text>
           <Text>
-            Inv Issue:{" "}
-            {format(new Date(data.return_date), "MMMM dd, yyyy 'at' h:mm a")}
+            ইস্যু তারিখঃ{" "}
+            {convertNumbers(
+              format(new Date(data.return_date), "PP", { locale: bn }),
+            )}
           </Text>
-          <Text>Inv No: {data.inv_number}</Text>
-          <Text>SR No: {data.sr_number}</Text>
+          <Text>
+            ইনভয়েস নংঃ <Text style={styles.fontRoboto}>{data.inv_number}</Text>
+          </Text>
+          <Text>
+            এস আর নংঃ <Text style={styles.fontRoboto}>{data.sr_number}</Text>
+          </Text>
         </View>
         <PDFDistributor
-          title="Distributor"
+          title="ডিস্ট্রিবিউটর তথ্যঃ"
           name={data.distributor_name}
-          code={data.distributor_code}
         />
       </View>
 
@@ -52,10 +53,8 @@ const SalesReturnPDF = ({ data }: { data: SalesReturnDetailsType }) => (
       />
 
       {/* Footer */}
-      <PDFFooter outlet_name={data.outlet_name} />
 
       {/* Signature */}
-      <PDFSignature />
     </Page>
   </Document>
 );

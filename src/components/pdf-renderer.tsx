@@ -127,13 +127,11 @@ export const PDFCompanyInfo: FC<{
 export const PDFDistributor: FC<{
   title: string;
   name: string;
-  code?: string;
-}> = ({ title, name, code }) => {
+}> = ({ title, name }) => {
   return (
     <View>
       <Text style={styles.boldText}>{title}:</Text>
       <Text>{name}</Text>
-      <Text>{code}</Text>
     </View>
   );
 };

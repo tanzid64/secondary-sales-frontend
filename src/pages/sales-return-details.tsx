@@ -1,11 +1,13 @@
+import { DetailsTable } from "@/components/details-table";
 import { Loader } from "@/components/loader";
 import SalesReturnPDF from "@/components/sales-return-pdf-renderer";
 import { buttonVariants } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
-import { ProductDetailType } from "@/lib/types";
+import { convertNumbers } from "@/lib/convert-numbers";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
+import { bn } from "date-fns/locale";
 import { DownloadIcon, PrinterIcon } from "lucide-react";
 import { FC } from "react";
 import { Link, useParams } from "react-router";
@@ -33,13 +35,13 @@ const SalesReturnDetails: FC = () => {
   return (
     <Loader isLoading={isFetching}>
       <div className="w-full h-full px-8 text-sm leading-1">
-        <h1 className="text-2xl my-8 w-full text-center">Sales Return</h1>
+        <h1 className="text-2xl my-8 w-full text-center">সেলস রিটার্ন</h1>
         {/* Header */}
         <div className=" flex justify-between items-start">
           {/* Company Info */}
           <div className="space-y-2">
-            <p className="text-lg">Company Info:</p>
-            <p className="font-bold">#{data.outlet_id}</p>
+            <p className="text-lg">ক্রেতার নামঃ </p>
+            <p className="font-bold sr-only">#{data.outlet_id}</p>
             <p className="uppercase text-lg">{data.outlet_name}</p>
           </div>
           {/* Buttons */}
@@ -72,102 +74,37 @@ const SalesReturnDetails: FC = () => {
         <div className="mt-8 flex justify-between items-end">
           {/* Invoice Info */}
           <div className="space-y-2">
-            <p className="text-lg">Return Info:</p>
+            <p className="text-lg">রিটার্ন তথ্যঃ </p>
             <p>
-              Inv Issue:{" "}
-              {format(new Date(data?.return_date), "MMMM dd, yyyy 'at' h:mm a")}
+              ইস্যু তারিখঃ{" "}
+              {convertNumbers(
+                format(new Date(data.return_date), "PP", { locale: bn }),
+              )}
             </p>
-            <p>Invoice No: {data.inv_number}</p>
-            <p>SR No: {data.sr_number}</p>
+            <p>
+              ইনভয়েস নংঃ <span className="font-roboto"> {data.inv_number}</span>
+            </p>
+            <p>
+              এস আর নংঃ <span className="font-roboto">{data.sr_number}</span>
+            </p>
           </div>
 
           <div className="space-y-2">
-            <p className="text-lg">Distributor:</p>
-            <p className="font-bold">#{data.distributor_code}</p>
+            <p className="text-lg">ডিস্ট্রিবিউটর তথ্যঃ</p>
+            <p className="font-bold sr-only">#{data.distributor_code}</p>
             <p className="uppercase">{data.distributor_name}</p>
           </div>
         </div>
 
         {/* Product Details */}
         <div className="mt-8">
-          <table className="table-auto w-full border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="border border-gray-300 px-2 py-1">
-                  Product Code
-                </th>
-                <th className="border border-gray-300 px-2 py-1">
-                  Product Name
-                </th>
-                <th className="border border-gray-300 px-2 py-1">Unit Price</th>
-                <th className="border border-gray-300 px-2 py-1">Qty</th>
-                <th className="border border-gray-300 px-2 py-1">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.product_details.map((product: ProductDetailType) => (
-                <tr key={product.product_code}>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.product_code}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.product_name}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.ctn_price}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.pqty_in_ctn}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {product.line_total}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-            <tfoot className="bg-gray-100">
-              <tr>
-                <td colSpan={3}></td>
-                <td
-                  className="font-bold px-10 py-1 text-end
-                "
-                >
-                  Grand Total
-                </td>
-                <td>{data.grand_tot}</td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td
-                  className="font-bold px-10 py-1 text-end
-                "
-                >
-                  Discount
-                </td>
-                <td>{data.discount}</td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td
-                  className="font-bold px-10 py-1 text-end
-                "
-                >
-                  Special Discount
-                </td>
-                <td>{data.special_discount}</td>
-              </tr>
-              <tr>
-                <td colSpan={3}></td>
-                <td
-                  className="font-bold px-10 py-1 text-end
-                "
-                >
-                  Amount After Discount
-                </td>
-                <td>{data.amount_after_discount}</td>
-              </tr>
-            </tfoot>
-          </table>
+          <DetailsTable
+            products={data.product_details}
+            grandTotal={data.grand_tot}
+            discount={data.discount}
+            specialDiscount={data.special_discount}
+            totalPayable={data.amount_after_discount}
+          />
         </div>
       </div>
     </Loader>

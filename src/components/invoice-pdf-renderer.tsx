@@ -47,7 +47,10 @@ const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
             <Text style={styles.fontRoboto}>{invoice.ord_number}</Text>
           </Text>
         </View>
-        <PDFDistributor title="ডিস্ট্রিবিউটর" name={invoice.distributor_name} />
+        <PDFDistributor
+          title="ডিস্ট্রিবিউটর তথ্যঃ"
+          name={invoice.distributor_name}
+        />
       </View>
 
       {/* Table */}
