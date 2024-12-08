@@ -34,7 +34,7 @@ const SalesReturnDetails: FC = () => {
 
   return (
     <Loader isLoading={isFetching}>
-      <div className="w-full h-full px-8 text-sm leading-1">
+      <div className="w-full h-full px-8 text-sm leading-1 font-tiro-bangla">
         <h1 className="text-2xl my-8 w-full text-center">সেলস রিটার্ন</h1>
         {/* Header */}
         <div className=" flex justify-between items-start">

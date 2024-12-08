@@ -63,13 +63,13 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-tiro-bangla;
+    @apply bg-background text-foreground font-roboto;
   }
 }
 
 @layer utilities {
   .th-header {
-    @apply border border-gray-300 px-1 py-1;
+    @apply border border-gray-300 px-1 py-1 font-tiro-bangla;
   }
   .td {
     @apply border border-gray-300 px-2 py-1 text-center font-tiro-bangla text-base;

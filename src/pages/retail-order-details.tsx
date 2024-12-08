@@ -30,13 +30,13 @@ const RetailOrderDetailsPage: FC = () => {
     );
   return (
     <Loader isLoading={isFetching}>
-      <div className="w-full h-full px-8 text-sm leading-1">
-        <h1 className="text-2xl my-8 w-full text-center">Order</h1>
+      <div className="w-full h-full px-8 text-sm leading-1 font-tiro-bangla">
+        <h1 className="text-2xl my-8 w-full text-center">অর্ডার</h1>
         {/* Header */}
         <div className=" flex justify-between items-start">
           {/* Company Info */}
           <div className="space-y-2">
-            <p className="text-lg">Company Info:</p>
+            <p className="text-lg">ক্রেতার নামঃ</p>
             <p className="font-bold">#{data.outlet_id}</p>
             <p className="uppercase text-lg">{data.outlet_name}</p>
           </div>
@@ -70,9 +70,9 @@ const RetailOrderDetailsPage: FC = () => {
         <div className="mt-8 flex justify-between items-end">
           {/* Invoice Info */}
           <div className="space-y-2">
-            <p className="text-lg">Order Info:</p>
+            <p className="text-lg">অর্ডার তথ্যঃ </p>
             <p>
-              Order Issue:{" "}
+              {" "}
               {format(new Date(data?.ord_date), "MMMM dd, yyyy 'at' h:mm a")}
             </p>
             <p>Order No: {data.ord_number}</p>
