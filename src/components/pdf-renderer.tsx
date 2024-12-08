@@ -1,13 +1,39 @@
+import { convertNumbers } from "@/lib/convert-numbers";
 import { ProductDetailType } from "@/lib/types";
-import { StyleSheet, Text, View } from "@react-pdf/renderer";
+import { Font, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { FC } from "react";
 
+Font.register({
+  family: "Roboto",
+  fonts: [
+    { src: "/fonts/Roboto-Regular.ttf", fontWeight: "normal" },
+    { src: "/fonts/Roboto-Bold.ttf", fontWeight: "bold" },
+    { src: "/fonts/Roboto-Italic.ttf", fontStyle: "italic" },
+  ],
+});
+
+Font.register({
+  family: "Trio Bangla",
+  fonts: [
+    {
+      src: "/fonts/TiroBangla-Regular.ttf",
+      fontWeight: "normal",
+    },
+    {
+      src: "/fonts/TiroBangla-Italic.ttf",
+      fontStyle: "italic",
+    },
+  ],
+});
 export const PDFStyles = StyleSheet.create({
   page: {
     padding: 30,
     fontSize: 10,
     lineHeight: 1.5,
-    fontFamily: "Helvetica",
+    fontFamily: "Trio Bangla",
+  },
+  fontRoboto: {
+    fontFamily: "Roboto",
   },
   header: {
     fontSize: 16,
@@ -51,8 +77,10 @@ export const PDFStyles = StyleSheet.create({
     fontSize: 10,
   },
   signature: {
-    marginTop: 40,
-    textAlign: "right",
+    marginTop: 80,
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row"
   },
   noBorderRow: {
     flexDirection: "row",
@@ -87,12 +115,10 @@ export const PDFHeader: FC<{ title: string }> = ({ title }) => {
 export const PDFCompanyInfo: FC<{
   title: string;
   name: string;
-  id: number;
-}> = ({ title, name, id }) => {
+}> = ({ title, name }) => {
   return (
     <View style={styles.companyInfo}>
       <Text style={styles.boldText}>{title}:</Text>
-      <Text>{id}</Text>
       <Text style={styles.upperCase}>{name}</Text>
     </View>
   );
@@ -132,19 +158,27 @@ export const PDFInfoTable: FC<PDFInfoTableProps> = ({
   return (
     <View style={styles.table}>
       <View style={[styles.tableRow, styles.tableCellHeader]}>
-        <Text style={styles.tableCell}>Product Code</Text>
-        <Text style={styles.tableCell}>Product Name</Text>
-        <Text style={styles.tableCell}>UNIT PRICE</Text>
-        <Text style={styles.tableCell}>Qty</Text>
-        <Text style={styles.tableCell}>AMOUNT</Text>
+        <Text style={styles.tableCell}>পণ্যের কোড</Text>
+        <Text style={styles.tableCell}>পণ্যের নাম</Text>
+        <Text style={styles.tableCell}>প্রতি ইউনিট মূল্য</Text>
+        <Text style={styles.tableCell}>পরিমাণ</Text>
+        <Text style={styles.tableCell}>মূল্য</Text>
       </View>
       {products.map((product) => (
         <View style={styles.tableRow} key={product.product_code}>
-          <Text style={styles.tableCell}>{product.product_code}</Text>
+          <Text style={styles.tableCell}>
+            {convertNumbers(product.product_code)}
+          </Text>
           <Text style={styles.tableCell}>{product.product_name}</Text>
-          <Text style={styles.tableCell}>{product.ctn_price}</Text>
-          <Text style={styles.tableCell}>{product.pqty_in_ctn}</Text>
-          <Text style={styles.tableCell}>{product.line_total}</Text>
+          <Text style={styles.tableCell}>
+            {convertNumbers(product.ctn_price)}
+          </Text>
+          <Text style={styles.tableCell}>
+            {convertNumbers(product.pqty_in_ctn)}
+          </Text>
+          <Text style={styles.tableCell}>
+            {convertNumbers(product.line_total)}
+          </Text>
         </View>
       ))}
 
@@ -152,35 +186,41 @@ export const PDFInfoTable: FC<PDFInfoTableProps> = ({
       <View style={styles.noBorderRow}>
         <Text style={styles.noBorderCell} />
         <Text style={styles.noBorderCell} />
-        <Text style={styles.rightAlignedCell}>Grand Total</Text>
-        <Text style={styles.noBorderCell}>{grand_tot}</Text>
+        <Text style={styles.rightAlignedCell}>সর্বমোট</Text>
+        <Text style={styles.noBorderCell}>{convertNumbers(grand_tot)}</Text>
       </View>
       <View style={styles.noBorderRow}>
         <Text style={styles.noBorderCell} />
         <Text style={styles.noBorderCell} />
-        <Text style={styles.rightAlignedCell}>Discount</Text>
-        <Text style={styles.noBorderCell}>{discount}</Text>
+        <Text style={styles.rightAlignedCell}>ডিসকাঊন্ট</Text>
+        <Text style={styles.noBorderCell}>{convertNumbers(discount)}</Text>
       </View>
       <View style={styles.noBorderRow}>
         <Text style={styles.noBorderCell} />
         <Text style={styles.noBorderCell} />
-        <Text style={styles.rightAlignedCell}>Special Discount</Text>
-        <Text style={styles.noBorderCell}>{special_discount}</Text>
+        <Text style={styles.rightAlignedCell}> বিশেষ ডিসকাঊন্ট</Text>
+        <Text style={styles.noBorderCell}>
+          {convertNumbers(special_discount)}
+        </Text>
       </View>
       {total_payable && (
         <View style={styles.noBorderRow}>
           <Text style={styles.noBorderCell} />
           <Text style={styles.noBorderCell} />
-          <Text style={styles.rightAlignedCell}>Amount After Discount</Text>
-          <Text style={styles.noBorderCell}>{total_payable}</Text>
+          <Text style={styles.rightAlignedCell}>মোট টাকা</Text>
+          <Text style={styles.noBorderCell}>
+            {convertNumbers(total_payable)}
+          </Text>
         </View>
       )}
       {amount_after_discount && (
         <View style={styles.noBorderRow}>
           <Text style={styles.noBorderCell} />
           <Text style={styles.noBorderCell} />
-          <Text style={styles.rightAlignedCell}>Amount After Discount</Text>
-          <Text style={styles.noBorderCell}>{amount_after_discount}</Text>
+          <Text style={styles.rightAlignedCell}>মোট টাকা</Text>
+          <Text style={styles.noBorderCell}>
+            {convertNumbers(amount_after_discount)}
+          </Text>
         </View>
       )}
     </View>
@@ -199,7 +239,12 @@ export const PDFFooter: FC<{ outlet_name: string }> = ({ outlet_name }) => {
 export const PDFSignature: FC = () => {
   return (
     <View style={styles.signature}>
-      <Text>Approved By</Text>
+      <View>
+        <Text>বিক্রেতার স্বাক্ষর</Text>
+      </View>
+      <View>
+        <Text>ক্রেতার স্বাক্ষর</Text>
+      </View>
     </View>
   );
 };

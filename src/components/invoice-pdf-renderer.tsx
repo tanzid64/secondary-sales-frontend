@@ -1,10 +1,11 @@
+import { convertNumbers } from "@/lib/convert-numbers";
 import { RetailInvoiceDetailsType } from "@/lib/types";
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 import { format } from "date-fns";
+import { bn } from "date-fns/locale";
 import {
   PDFCompanyInfo,
   PDFDistributor,
-  PDFFooter,
   PDFHeader,
   PDFInfoTable,
   PDFSignature,
@@ -18,35 +19,35 @@ const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       {/* Header */}
-      <PDFHeader title="Invoice" />
+      <PDFHeader title="ইনভয়েস" />
 
       {/* Company Info */}
-      <PDFCompanyInfo
-        title="Bill To"
-        name={invoice.outlet_name}
-        id={invoice.outlet_id}
-      />
+      <PDFCompanyInfo title="ক্রেতার নাম" name={invoice.outlet_name} />
 
       {/* Bill To and Ship To */}
       <View style={styles.row}>
         <View>
-          <Text style={styles.boldText}>Invoice Info:</Text>
+          <Text style={styles.boldText}>ইনভয়েস তথ্যঃ:</Text>
           <Text>
-            Inv Issue:{" "}
-            {format(new Date(invoice.inv_date), "MMMM dd, yyyy 'at' h:mm a")}
+            ইস্যু তারিখঃ{" "}
+            {convertNumbers(
+              format(new Date(invoice.inv_date), "PP", { locale: bn }),
+            )}
           </Text>
-          <Text>Inv No: {invoice.inv_number}</Text>
-          <Text>Challan No: {invoice.challan_number}</Text>
-          <Text>Order No: {invoice.ord_number}</Text>
+          <Text>
+            ইনভয়েস নংঃ{" "}
+            <Text style={styles.fontRoboto}>{invoice.inv_number}</Text>
+          </Text>
+          <Text>
+            চালান নংঃ{" "}
+            <Text style={styles.fontRoboto}>{invoice.challan_number}</Text>
+          </Text>
+          <Text>
+            অর্ডার নংঃ{" "}
+            <Text style={styles.fontRoboto}>{invoice.ord_number}</Text>
+          </Text>
         </View>
-        <PDFDistributor title="Distributor" name={invoice.distributor_name} />
-      </View>
-
-      {/* Invoice Info */}
-      <View style={styles.row}>
-        <Text>Delivery Status: {invoice.delivery_status_name}</Text>
-        <Text>Payment Status: {invoice.pay_status}</Text>
-        <Text>Cancellation Status: {invoice.cancel_status_name}</Text>
+        <PDFDistributor title="ডিস্ট্রিবিউটর" name={invoice.distributor_name} />
       </View>
 
       {/* Table */}
@@ -57,9 +58,6 @@ const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
         special_discount={invoice.special_discount}
         total_payable={invoice.total_payable}
       />
-
-      {/* Footer */}
-      <PDFFooter outlet_name={invoice.outlet_name} />
 
       {/* Signature */}
       <PDFSignature />
