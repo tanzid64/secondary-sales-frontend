@@ -1,4 +1,5 @@
 import { axiosInstance } from "@/lib/axios";
+import { cookieManager } from "@/lib/handle-cookie";
 import { UserType } from "@/lib/types";
 import { MenuIcon, User2Icon } from "lucide-react";
 import { FC } from "react";
@@ -13,7 +14,6 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
-import { cookieManager } from "@/lib/handle-cookie";
 
 interface NavbarProps {
   user: UserType;
@@ -37,7 +37,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
       console.log(error);
     }
   };
-  
+
   if (!user) {
     return null;
   }
@@ -59,11 +59,14 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
 
   return (
     <nav
-      className="border-b h-16   sticky top-0 w-full shadow-sm bg-background
+      className="border-b min-h-16   sticky top-0 w-full shadow-sm bg-background
     "
     >
-      <div className="pt-3">
+      <div className="py-3">
         <div className="flex items-center justify-between pl-5 md:pl-0">
+          <NavLink to="/" className="">
+            <img src="/savoy_logo.png" alt="Logo" className="w-16" />
+          </NavLink>
           <ul className="hidden md:flex items-center justify-center gap-4 mx-auto">
             <li>
               <NavLink
@@ -99,8 +102,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
               </NavLink>
             </li>
           </ul>
-          <MobileNavbar />
-          <div className="pr-5">
+          <div className="pr-5 space-x-5">
             <DropdownMenu>
               <DropdownMenuTrigger asChild className="">
                 <Button variant="outline" size="icon" className="rounded-full">
@@ -121,6 +123,7 @@ export const Navbar: FC<NavbarProps> = ({ user }) => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <MobileNavbar />
           </div>
         </div>
       </div>
