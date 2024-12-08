@@ -1,8 +1,6 @@
-import { convertNumbers } from "@/lib/convert-numbers";
 import { SalesReturnDetailsType } from "@/lib/types";
+import { banglaFormattedDate } from "@/lib/utils";
 import { Document, Page, Text, View } from "@react-pdf/renderer";
-import { format } from "date-fns";
-import { bn } from "date-fns/locale";
 import {
   PDFCompanyInfo,
   PDFDistributor,
@@ -23,13 +21,8 @@ const SalesReturnPDF = ({ data }: { data: SalesReturnDetailsType }) => (
       {/* Bill To and Ship To */}
       <View style={styles.row}>
         <View>
-          <Text style={styles.boldText}>Return Info:</Text>
-          <Text>
-            ইস্যু তারিখঃ{" "}
-            {convertNumbers(
-              format(new Date(data.return_date), "PP", { locale: bn }),
-            )}
-          </Text>
+          <Text style={styles.boldText}>রিটার্ন তত্থ্যঃ </Text>
+          <Text>ইস্যু তারিখঃ {banglaFormattedDate(data.return_date)}</Text>
           <Text>
             ইনভয়েস নংঃ <Text style={styles.fontRoboto}>{data.inv_number}</Text>
           </Text>

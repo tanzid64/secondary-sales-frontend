@@ -1,8 +1,6 @@
-import { convertNumbers } from "@/lib/convert-numbers";
 import { RetailOrderDetailsType } from "@/lib/types";
+import { banglaFormattedDate } from "@/lib/utils";
 import { Document, Page, Text, View } from "@react-pdf/renderer";
-import { format } from "date-fns";
-import { bn } from "date-fns/locale";
 import {
   PDFCompanyInfo,
   PDFHeader,
@@ -26,12 +24,7 @@ const OrderPDF = ({ order }: { order: RetailOrderDetailsType }) => (
       <View style={styles.row}>
         <View>
           <Text style={styles.boldText}>অর্ডার তথ্যঃ</Text>
-          <Text>
-            ইস্যু তারিখঃ{" "}
-            {convertNumbers(
-              format(new Date(order.ord_date), "PP", { locale: bn }),
-            )}
-          </Text>
+          <Text>ইস্যু তারিখঃ {banglaFormattedDate(order.ord_date)}</Text>
           <Text>
             অর্ডার নংঃ <Text style={styles.fontRoboto}>{order.ord_number}</Text>
           </Text>

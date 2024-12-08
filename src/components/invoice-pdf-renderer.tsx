@@ -1,8 +1,6 @@
-import { convertNumbers } from "@/lib/convert-numbers";
 import { RetailInvoiceDetailsType } from "@/lib/types";
+import { banglaFormattedDate } from "@/lib/utils";
 import { Document, Page, Text, View } from "@react-pdf/renderer";
-import { format } from "date-fns";
-import { bn } from "date-fns/locale";
 import {
   PDFCompanyInfo,
   PDFDistributor,
@@ -28,12 +26,7 @@ const InvoicePDF = ({ invoice }: { invoice: RetailInvoiceDetailsType }) => (
       <View style={styles.row}>
         <View>
           <Text style={styles.boldText}>ইনভয়েস তথ্যঃ:</Text>
-          <Text>
-            ইস্যু তারিখঃ{" "}
-            {convertNumbers(
-              format(new Date(invoice.inv_date), "PP", { locale: bn }),
-            )}
-          </Text>
+          <Text>ইস্যু তারিখঃ {banglaFormattedDate(invoice.inv_date)}</Text>
           <Text>
             ইনভয়েস নংঃ{" "}
             <Text style={styles.fontRoboto}>{invoice.inv_number}</Text>
