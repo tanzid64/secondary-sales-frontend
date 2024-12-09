@@ -69,17 +69,12 @@
 
 @layer utilities {
   .th-header {
-    @apply border border-gray-300 px-1 py-1 font-tiro-bangla;
+    @apply p-[15px] whitespace-nowrap font-normal text-[16px] font-tiro-bangla ;
   }
   .td {
-    @apply border border-gray-300 px-2 py-1 text-center font-tiro-bangla text-base;
+    @apply p-[15px] text-right text-[1.2em] font-tiro-bangla text-base;
   }
-  .tfooter {
-    @apply font-medium  py-1 text-end font-tiro-bangla;
-  }
-  .tfooter-content {
-    @apply text-center font-medium font-tiro-bangla text-base;
-  }
+
   .tfooter-signature{
     @apply font-tiro-bangla font-normal text-lg border-t border-t-primary p-2 pt-1;
   }

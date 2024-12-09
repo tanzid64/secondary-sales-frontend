@@ -30,7 +30,7 @@ const RetailOrderDetailsPage: FC = () => {
     );
   return (
     <Loader isLoading={isFetching}>
-      <div className="w-full h-full px-8 text-sm leading-1 font-tiro-bangla">
+      <div className="w-full h-full px-8 text-sm leading-1 font-tiro-bangla overflow-x-hidden">
         <h1 className="text-2xl my-8 w-full text-center">অর্ডার</h1>
         {/* Header */}
         <div className=" flex justify-between items-start">
@@ -71,17 +71,14 @@ const RetailOrderDetailsPage: FC = () => {
           {/* Invoice Info */}
           <div className="space-y-2">
             <p className="text-lg">অর্ডার তথ্যঃ </p>
-            <p>
-              অর্ডার ইস্যুঃ {" "}
-              {banglaFormattedDate(data.ord_date)}
-            </p>
-            <p>অর্ডার নংঃ  {data.ord_number}</p>
+            <p>অর্ডার ইস্যুঃ {banglaFormattedDate(data.ord_date)}</p>
+            <p>অর্ডার নংঃ {data.ord_number}</p>
           </div>
         </div>
 
         {/* Status */}
         <div className="flex justify-between items-center mt-8">
-          <p>ডেলিভারী স্টাটাসঃ  {data.dlv_status}</p>
+          <p>ডেলিভারী স্টাটাসঃ {data.dlv_status}</p>
         </div>
 
         {/* Product Details */}
@@ -95,6 +92,8 @@ const RetailOrderDetailsPage: FC = () => {
           />
         </div>
       </div>
+
+      
     </Loader>
   );
 };
