@@ -31,6 +31,8 @@ const InvoiceDetails: FC = () => {
       </div>
     );
 
+  console.log(invoice);
+
   return (
     <Loader isLoading={isFetching}>
       {/*  */}

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import tailwindAnimate from 'tailwindcss-animate'
 export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
@@ -18,7 +19,7 @@ export default {
       },
       fontFamily: {
         "tiro-bangla": ["Tiro Bangla", "sans-serif"],
-        "roboto": ["Roboto", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
       fontWeight: {
         normal: 400,
@@ -70,5 +71,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindAnimate],
 };
