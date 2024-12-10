@@ -2,7 +2,7 @@ import axios from "axios";
 import { cookieManager } from "./handle-cookie";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://secondary.goldengroup-bd.com",
+  baseURL: import.meta.env.VITE_SERVER_URL as string ,
   headers: {
     "Content-Type": "application/json",
   },

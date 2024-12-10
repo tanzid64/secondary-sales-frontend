@@ -20,6 +20,7 @@ export default {
       fontFamily: {
         "tiro-bangla": ["Tiro Bangla", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
+        "noto-serif": ["Noto Serif Bengali", "serif"],
       },
       fontWeight: {
         normal: 400,

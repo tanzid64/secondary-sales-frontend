@@ -1,3 +1,4 @@
+import { DetailsTablePrint } from "@/components/details-table-print";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
@@ -6,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import { DownloadIcon, PrinterIcon } from "lucide-react";
 import { FC, useRef } from "react";
 import { useParams } from "react-router";
-import { DetailsTablePrint } from "@/components/details-table-print";
 //@ts-ignore
 import html2pdf from "html2pdf.js";
 
@@ -92,10 +92,8 @@ const SalesReturnDetails: FC = () => {
                     />
                   </a>
                 </div>
-                <div className="w-1/2 text-right">
-                  <p className="text-lg font-hind-siliguri font-medium">
-                    ডিস্ট্রিবিউটরঃ
-                  </p>
+                <div className="w-1/2 text-right text-sm">
+                  <p className="font-medium">ডিস্ট্রিবিউটরঃ</p>
                   <p className="uppercase">{returnData.distributor_name}</p>
                   <p>{returnData.distributor_address}</p>
                 </div>
@@ -104,35 +102,20 @@ const SalesReturnDetails: FC = () => {
 
             <main className="pb-[50px]">
               <div className="flex justify-between mb-[20px]">
-                <div className="w-1/2 text-left">
-                  <p className="text-xl font-hind-siliguri font-medium">
-                    রিটার্ন তথ্যঃ
-                  </p>
-                  <p className="text-xl">
+                <div className="w-1/2 text-left text-sm">
+                  <p className=" font-medium">রিটার্ন তথ্যঃ</p>
+                  <p className="">
                     ইস্যু তারিখঃ {banglaFormattedDate(returnData.return_date)}
                   </p>
-                  <p className="text-xl">
-                    রিটার্ন নংঃ{" "}
-                    <span className="font-roboto text-base">
-                      {returnData.sr_number}
-                    </span>
-                  </p>
-                  <p className="text-xl">
-                    ইনভয়েস নংঃ{" "}
-                    <span className="font-roboto text-base">
-                      {returnData.inv_number}
-                    </span>
-                  </p>
+                  <p className="">রিটার্ন নংঃ {returnData.sr_number}</p>
+                  <p className="">ইনভয়েস নংঃ {returnData.inv_number}</p>
                 </div>
-                <div className="w-1/2 text-right">
-                  <p className="text-xl font-hind-siliguri ">ক্রেতার নামঃ</p>
+                <div className="w-1/2 text-right text-sm">
+                  <p className=" ">ক্রেতার নামঃ</p>
                   <p className="font-bold sr-only">#{returnData.outlet_id}</p>
-                  <p className="uppercase text-lg">{returnData.outlet_name}</p>
+                  <p className="uppercase ">{returnData.outlet_name}</p>
                   <p>{returnData.outlet_address}</p>
-                  <p className="text-xl">
-                    মোবাইলঃ{" "}
-                    <span className="text-base">{returnData.outlet_phone}</span>
-                  </p>
+                  <p className="">মোবাইলঃ {returnData.outlet_phone}</p>
                 </div>
               </div>
 

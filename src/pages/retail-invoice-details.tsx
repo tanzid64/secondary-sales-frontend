@@ -96,9 +96,9 @@ const InvoiceDetails: FC = () => {
                     />
                   </a>
                 </div>
-                <div className="w-1/2 text-right">
-                  <p className="text-lg font-hind-siliguri font-medium">
-                    ডিস্ট্রিবিউটরঃ
+                <div className="w-1/2 text-right text-sm">
+                  <p className="font-medium">
+                    ডিস্ট্রিবিউটর তথ্যঃ
                   </p>
                   <p className="uppercase">{invoice.distributor_name}</p>
                   <p>{invoice.distributor_address}</p>
@@ -108,41 +108,35 @@ const InvoiceDetails: FC = () => {
 
             <main className="pb-[50px]">
               <div className="flex justify-between mb-[20px]">
-                <div className="w-1/2 text-left">
-                  <p className="text-xl font-hind-siliguri font-medium">
+                <div className="w-1/2 text-left text-sm">
+                  <p className=" font-medium">
                     ইনভয়েস তথ্যঃ
                   </p>
-                  <p className="text-xl">
+                  <p className="">
                     ইস্যু তারিখঃ {banglaFormattedDate(invoice.inv_date)}
                   </p>
-                  <p className="text-xl">
+                  <p className="">
                     ইনভয়েস নংঃ{" "}
-                    <span className="font-roboto text-base">
                       {" "}
                       {invoice.inv_number}
-                    </span>
                   </p>
-                  <p className="text-xl">
+                  <p className="">
                     অর্ডার নংঃ{" "}
-                    <span className="font-roboto text-base">
-                      {invoice.ord_number}
-                    </span>
+                      {invoice.ord_number || "--"}
                   </p>
-                  <p className="text-xl">
+                  <p className="">
                     চালান নংঃ{" "}
-                    <span className="font-roboto text-base">
                       {invoice.challan_number}
-                    </span>
                   </p>
                 </div>
-                <div className="w-1/2 text-right">
-                  <p className="text-xl font-hind-siliguri ">ক্রেতার নামঃ</p>
+                <div className="w-1/2 text-right text-sm">
+                  <p className="">ক্রেতার নামঃ</p>
                   <p className="font-bold sr-only">#{invoice.outlet_id}</p>
-                  <p className="uppercase text-lg">{invoice.outlet_name}</p>
+                  <p className="uppercase">{invoice.outlet_name}</p>
                   <p>{invoice.outlet_address}</p>
-                  <p className="text-xl">
+                  <p className="">
                     মোবাইলঃ{" "}
-                    <span className="text-base">{invoice.outlet_phone}</span>
+                    {invoice.outlet_phone}
                   </p>
                 </div>
               </div>

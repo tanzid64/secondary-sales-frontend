@@ -29,8 +29,8 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
   return (
     <>
       {/* Shadcn table */}
-      <Table className="border text-base">
-        <TableHeader className="text-primary text-lg">
+      <Table className="border text-xs">
+        <TableHeader className="text-primary text-xs">
           <TableRow>
             <TableHead className="text-center w-[50px] text-primary border">
               #
@@ -82,7 +82,7 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
               <TableCell className="text-center border">
                 {convertNumbers(product.pqty_in_ctn)}
               </TableCell>
-              <TableCell className="text-right border text-base">
+              <TableCell className="text-right border">
                 {convertNumbers(product.line_total)}
               </TableCell>
             </TableRow>

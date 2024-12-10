@@ -93,11 +93,11 @@ const RetailOrderDetailsPage: FC = () => {
                     />
                   </a>
                 </div>
-                <div className="w-1/2 text-right">
-                  <p className="text-lg font-hind-siliguri font-medium">
-                    ডিস্ট্রিবিউটরঃ
+                <div className="w-1/2 text-right text-sm">
+                  <p className="  font-medium">
+                    ডিস্ট্রিবিউটর তথ্যঃ
                   </p>
-                  <p className="uppercase">{orderData.distributor_name}</p>
+                  <p className="uppercase ">{orderData.distributor_name}</p>
                   <p>{orderData.distributor_address}</p>
                 </div>
               </div>
@@ -105,28 +105,27 @@ const RetailOrderDetailsPage: FC = () => {
 
             <main className="pb-[50px]">
               <div className="flex justify-between mb-[20px]">
-                <div className="w-1/2 text-left">
-                  <p className="text-xl font-hind-siliguri font-medium">
+                <div className="w-1/2 text-left text-sm">
+                  <p className="  font-medium">
                     অর্ডার তথ্যঃ
                   </p>
-                  <p className="text-xl">
+                  <p className="">
                     ইস্যু তারিখঃ {banglaFormattedDate(orderData.ord_date)}
                   </p>
-                  <p className="text-xl">
+                  <p className="">
                     অর্ডার নংঃ{" "}
-                    <span className="font-roboto text-base">
+                    <span className="font-roboto text-sm">
                       {orderData.ord_number}
                     </span>
                   </p>
                 </div>
-                <div className="w-1/2 text-right">
-                  <p className="text-xl font-hind-siliguri ">ক্রেতার নামঃ</p>
+                <div className="w-1/2 text-right text-sm">
+                  <p className="  ">ক্রেতার নামঃ</p>
                   <p className="font-bold sr-only">#{orderData.outlet_id}</p>
-                  <p className="uppercase text-lg">{orderData.outlet_name}</p>
+                  <p className="uppercase">{orderData.outlet_name}</p>
                   <p>{orderData.outlet_address}</p>
-                  <p className="text-xl">
-                    মোবাইলঃ{" "}
-                    <span className="text-base">{orderData.outlet_phone}</span>
+                  <p className="">
+                    মোবাইলঃ {orderData.outlet_phone}
                   </p>
                 </div>
               </div>
