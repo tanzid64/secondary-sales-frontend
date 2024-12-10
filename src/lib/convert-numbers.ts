@@ -1,4 +1,4 @@
-export const convertNumbers = (data: number | string): string | undefined => {
+export const convertNumbers = (data: string): string | undefined => {
   const numbers: { [key: string]: string } = {
     '0': '০',
     '1': '১',
@@ -15,11 +15,9 @@ export const convertNumbers = (data: number | string): string | undefined => {
   };
 
   if (!data) return undefined; 
-
-  const input = data.toString();
   let result = '';
-
-  for (const char of input) {
+  
+  for (const char of data) {
     result += numbers[char] || char; 
   }
 

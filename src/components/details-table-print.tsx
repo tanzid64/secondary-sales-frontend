@@ -31,7 +31,7 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
       {/* Shadcn table */}
       <Table className="border text-xs">
         <TableHeader className="text-primary text-xs">
-          <TableRow>
+          <TableRow >
             <TableHead className="text-center w-[50px] text-primary border">
               #
             </TableHead>
@@ -45,13 +45,13 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
               কার্টুন সাইজ (পিস)
             </TableHead>
             <TableHead className="text-center text-primary border w-[80px]">
-              সাইজ/পিস
+              পরিমাণ/পিস
             </TableHead>
             <TableHead className="text-center w-[80px] text-primary">
               মূল্য/কার্টুন
             </TableHead>
             <TableHead className="text-center text-primary border w-[80px]">
-              পরিমাণ/কার্টুন
+              অর্ডার পরিমাণ/কার্টুন
             </TableHead>
             <TableHead className="text-right text-primary border w-[150px]">
               মূল্য
@@ -62,7 +62,7 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
           {products.map((product, idx) => (
             <TableRow key={idx}>
               <TableCell className="text-center border">
-                {convertNumbers(idx + 1)}
+                {convertNumbers((idx + 1).toString())}{" "}
               </TableCell>
               <TableCell className="text-center border">
                 {convertNumbers(product.product_code)}
@@ -71,16 +71,16 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
                 {product.product_name}
               </TableCell>
               <TableCell className="text-center border">
-                {convertNumbers(product.ctn_size)}
+                {convertNumbers(product.ctn_size.toString())}
               </TableCell>
               <TableCell className="text-center border">
-                {convertNumbers(product.pqty_in_pcs)}
+                {convertNumbers(product.pqty_in_pcs.toString())}
               </TableCell>
               <TableCell className="text-center border">
                 {convertNumbers(product.ctn_price)}
               </TableCell>
               <TableCell className="text-center border">
-                {convertNumbers(product.pqty_in_ctn)}
+                {convertNumbers(product.pqty_in_ctn.toString())}
               </TableCell>
               <TableCell className="text-right border">
                 {convertNumbers(product.line_total)}
@@ -99,7 +99,7 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
               সর্বমোট
             </TableCell>
             <TableCell className="text-right border">
-              {convertNumbers(grandTotal)}
+              {convertNumbers(grandTotal.toString())}
             </TableCell>
           </TableRow>
           <TableRow>
@@ -112,7 +112,7 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
               ডিসকাঊন্ট
             </TableCell>
             <TableCell className="text-right border">
-              {convertNumbers(discount)}
+              {convertNumbers(discount.toString())}
             </TableCell>
           </TableRow>
           <TableRow>
@@ -126,7 +126,7 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
               বিশেষ ডিসকাঊন্ট
             </TableCell>
             <TableCell className="text-right border">
-              {convertNumbers(specialDiscount)}
+              {convertNumbers(specialDiscount.toString())}
             </TableCell>
           </TableRow>
           <TableRow>
@@ -139,7 +139,7 @@ export const DetailsTablePrint: FC<DetailsTablePrintProps> = ({
               মোট টাকা
             </TableCell>
             <TableCell className="text-right border">
-              {convertNumbers(totalPayable)}
+              {convertNumbers(totalPayable.toString())}
             </TableCell>
           </TableRow>
         </TableFooter>

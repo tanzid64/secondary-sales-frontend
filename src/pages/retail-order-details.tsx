@@ -58,27 +58,31 @@ const RetailOrderDetailsPage: FC = () => {
       </div>
     );
 
+    console.log(orderData);
   return (
     <Loader isLoading={isFetching}>
       <div className="p-[30px]">
-        <div className="toolbar hidden-print text-right mb-2 space-x-4">
-          <Button onClick={handleDownloadPDF} variant={"secondary"} size={"sm"}>
-            <DownloadIcon className="size-4" />
-            <span>Save PDF</span>
-          </Button>
+          <div className="text-right space-x-4 p-4">
+            <Button
+              onClick={handleDownloadPDF}
+              variant={"secondary"}
+              size={"sm"}
+            >
+              <DownloadIcon className="size-4" />
+              <span>Save PDF</span>
+            </Button>
 
-          <Button size={"sm"} variant="secondary" onClick={handlePrintPDF}>
-            <PrinterIcon className="size-4" />
-            <span>Print</span>
-          </Button>
-        </div>
-        <hr />
-
+            <Button size={"sm"} variant="secondary" onClick={handlePrintPDF}>
+              <PrinterIcon className="size-4" />
+              <span>Print</span>
+            </Button>
+          </div>
+          <hr className="m-[15px]" />
         {/* The section we want to turn into PDF */}
         <div
           id="invoice"
           ref={orderRef}
-          className="relative min-h-[1050px] w-full p-[15px]"
+          className="relative min-h-[1050px] w-full p-4"
         >
           <div className="">
             <header className="py-[10px] mb-[20px] border-b border-[#3989c6]">
@@ -94,9 +98,7 @@ const RetailOrderDetailsPage: FC = () => {
                   </a>
                 </div>
                 <div className="w-1/2 text-right text-sm">
-                  <p className="  font-medium">
-                    ডিস্ট্রিবিউটর তথ্যঃ
-                  </p>
+                  <p className="  font-medium">ডিস্ট্রিবিউটর তথ্যঃ</p>
                   <p className="uppercase ">{orderData.distributor_name}</p>
                   <p>{orderData.distributor_address}</p>
                 </div>
@@ -106,9 +108,7 @@ const RetailOrderDetailsPage: FC = () => {
             <main className="pb-[50px]">
               <div className="flex justify-between mb-[20px]">
                 <div className="w-1/2 text-left text-sm">
-                  <p className="  font-medium">
-                    অর্ডার তথ্যঃ
-                  </p>
+                  <p className="  font-medium">অর্ডার তথ্যঃ</p>
                   <p className="">
                     ইস্যু তারিখঃ {banglaFormattedDate(orderData.ord_date)}
                   </p>
@@ -124,9 +124,7 @@ const RetailOrderDetailsPage: FC = () => {
                   <p className="font-bold sr-only">#{orderData.outlet_id}</p>
                   <p className="uppercase">{orderData.outlet_name}</p>
                   <p>{orderData.outlet_address}</p>
-                  <p className="">
-                    মোবাইলঃ {orderData.outlet_phone}
-                  </p>
+                  <p className="">মোবাইলঃ {orderData.outlet_phone}</p>
                 </div>
               </div>
 

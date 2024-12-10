@@ -64,7 +64,7 @@ const InvoiceDetails: FC = () => {
   return (
     <Loader isLoading={isFetching}>
       <div className="p-[30px]">
-        <div className="toolbar hidden-print text-right mb-2 space-x-4">
+        <div className="text-right space-x-4 p-4">
           <Button onClick={handleDownloadPDF} variant={"secondary"} size={"sm"}>
             <DownloadIcon className="size-4" />
             <span>Save PDF</span>
@@ -75,7 +75,7 @@ const InvoiceDetails: FC = () => {
             <span>Print</span>
           </Button>
         </div>
-        <hr />
+        <hr className="m-[15px]" />
 
         {/* The section we want to turn into PDF */}
         <div
@@ -97,9 +97,7 @@ const InvoiceDetails: FC = () => {
                   </a>
                 </div>
                 <div className="w-1/2 text-right text-sm">
-                  <p className="font-medium">
-                    ডিস্ট্রিবিউটর তথ্যঃ
-                  </p>
+                  <p className="font-medium">ডিস্ট্রিবিউটর তথ্যঃ</p>
                   <p className="uppercase">{invoice.distributor_name}</p>
                   <p>{invoice.distributor_address}</p>
                 </div>
@@ -109,35 +107,20 @@ const InvoiceDetails: FC = () => {
             <main className="pb-[50px]">
               <div className="flex justify-between mb-[20px]">
                 <div className="w-1/2 text-left text-sm">
-                  <p className=" font-medium">
-                    ইনভয়েস তথ্যঃ
-                  </p>
+                  <p className=" font-medium">ইনভয়েস তথ্যঃ</p>
                   <p className="">
                     ইস্যু তারিখঃ {banglaFormattedDate(invoice.inv_date)}
                   </p>
-                  <p className="">
-                    ইনভয়েস নংঃ{" "}
-                      {" "}
-                      {invoice.inv_number}
-                  </p>
-                  <p className="">
-                    অর্ডার নংঃ{" "}
-                      {invoice.ord_number || "--"}
-                  </p>
-                  <p className="">
-                    চালান নংঃ{" "}
-                      {invoice.challan_number}
-                  </p>
+                  <p className="">ইনভয়েস নংঃ {invoice.inv_number}</p>
+                  <p className="">অর্ডার নংঃ {invoice.ord_number || "--"}</p>
+                  <p className="">চালান নংঃ {invoice.challan_number}</p>
                 </div>
                 <div className="w-1/2 text-right text-sm">
                   <p className="">ক্রেতার নামঃ</p>
                   <p className="font-bold sr-only">#{invoice.outlet_id}</p>
                   <p className="uppercase">{invoice.outlet_name}</p>
                   <p>{invoice.outlet_address}</p>
-                  <p className="">
-                    মোবাইলঃ{" "}
-                    {invoice.outlet_phone}
-                  </p>
+                  <p className="">মোবাইলঃ {invoice.outlet_phone}</p>
                 </div>
               </div>
 
@@ -156,12 +139,11 @@ const InvoiceDetails: FC = () => {
                   <p className="tfooter-signature">ক্রেতার স্বাক্ষর</p>
                 </div>
                 <p className="text-[#777] border-t border-[#aaa] py-[8px] ">
-                  Invoice was created on a computer and is valid without
-                  the signature and seal.
+                  Invoice was created on a computer and is valid without the
+                  signature and seal.
                 </p>
               </footer>
             </main>
-
           </div>
         </div>
       </div>

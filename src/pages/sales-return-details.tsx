@@ -60,7 +60,7 @@ const SalesReturnDetails: FC = () => {
   return (
     <Loader isLoading={isFetching}>
       <div className="p-[30px]">
-        <div className="toolbar hidden-print text-right mb-2 space-x-4">
+        <div className="text-right space-x-4 p-4">
           <Button onClick={handleDownloadPDF} variant={"secondary"} size={"sm"}>
             <DownloadIcon className="size-4" />
             <span>Save PDF</span>
@@ -71,7 +71,7 @@ const SalesReturnDetails: FC = () => {
             <span>Print</span>
           </Button>
         </div>
-        <hr />
+        <hr className="m-[15px]" />
 
         {/* The section we want to turn into PDF */}
         <div
