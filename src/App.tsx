@@ -1,9 +1,6 @@
 import { FC } from "react";
 import { Navigate, Route, Routes } from "react-router";
 import InvoiceDetails from "./pages/retail-invoice-details";
-import PrintInvoicePDF from "./pages/print-invoice-pdf";
-import PrintOrderPDF from "./pages/print-order-pdf";
-import PrintSalesReturnPDF from "./pages/print-sales-return-pdf";
 import RetailInvoicesPage from "./pages/retail-invoices";
 import { RetailOrderPage } from "./pages/retail-order";
 import RetailOrderDetailsPage from "./pages/retail-order-details";
@@ -26,21 +23,13 @@ const App: FC = () => {
           path="/retail-order-details/:id"
           element={<RetailOrderDetailsPage />}
         />
-        <Route path="/retail-order-print/:id" element={<PrintOrderPDF />} />
         <Route path="/retail-invoices" element={<RetailInvoicesPage />} />
         <Route path="/retail-invoices/:id" element={<InvoiceDetails />} />
-        <Route
-          path="/retail-invoices-print/:id"
-          element={<PrintInvoicePDF />}
-        />
+
         <Route path="/sales-return" element={<SalesReturn />} />
         <Route
           path="/sales-return-details/:id"
           element={<SalesReturnDetails />}
-        />
-        <Route
-          path="/sales-return-print/:id"
-          element={<PrintSalesReturnPDF />}
         />
       </Route>
     </Routes>

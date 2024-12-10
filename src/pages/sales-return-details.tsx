@@ -1,14 +1,8 @@
-import { DetailsTable } from "@/components/details-table";
 import { Loader } from "@/components/loader";
-import SalesReturnPDF from "@/components/sales-return-pdf-renderer";
-import { buttonVariants } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
-import { banglaFormattedDate } from "@/lib/utils";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useQuery } from "@tanstack/react-query";
-import { DownloadIcon, PrinterIcon } from "lucide-react";
 import { FC } from "react";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 
 const SalesReturnDetails: FC = () => {
   const params = useParams();
@@ -30,78 +24,7 @@ const SalesReturnDetails: FC = () => {
       </div>
     );
 
-  return (
-    <Loader isLoading={isFetching}>
-      <div className="w-full h-full px-8 text-sm leading-1 font-tiro-bangla">
-        <h1 className="text-2xl my-8 w-full text-center">সেলস রিটার্ন</h1>
-        {/* Header */}
-        <div className=" flex justify-between items-start">
-          {/* Company Info */}
-          <div className="space-y-2">
-            <p className="text-lg">ক্রেতার নামঃ </p>
-            <p className="font-bold sr-only">#{data.outlet_id}</p>
-            <p className="uppercase text-lg">{data.outlet_name}</p>
-          </div>
-          {/* Buttons */}
-          <div className="space-x-4">
-            <PDFDownloadLink
-              document={<SalesReturnPDF data={data} />}
-              fileName={`Invoice_${data?.sr_number || "unknown"}.pdf`}
-              className={buttonVariants({
-                size: "sm",
-                variant: "secondary",
-              })}
-            >
-              <DownloadIcon className="size-4" />
-              <span>Save</span>
-            </PDFDownloadLink>
-
-            <Link
-              to={`/sales-return-print/${id}`}
-              className={buttonVariants({
-                size: "sm",
-                variant: "secondary",
-              })}
-            >
-              <PrinterIcon className="size-4" />
-              <span>Print</span>
-            </Link>
-          </div>
-        </div>
-
-        <div className="mt-8 flex justify-between items-end">
-          {/* Invoice Info */}
-          <div className="space-y-2">
-            <p className="text-lg">রিটার্ন তথ্যঃ </p>
-            <p>ইস্যু তারিখঃ {banglaFormattedDate(data.return_date)}</p>
-            <p>
-              ইনভয়েস নংঃ <span className="font-roboto"> {data.inv_number}</span>
-            </p>
-            <p>
-              এস আর নংঃ <span className="font-roboto">{data.sr_number}</span>
-            </p>
-          </div>
-
-          <div className="space-y-2">
-            <p className="text-lg">ডিস্ট্রিবিউটর তথ্যঃ</p>
-            <p className="font-bold sr-only">#{data.distributor_code}</p>
-            <p className="uppercase">{data.distributor_name}</p>
-          </div>
-        </div>
-
-        {/* Product Details */}
-        <div className="mt-8">
-          <DetailsTable
-            products={data.product_details}
-            grandTotal={data.grand_tot}
-            discount={data.discount}
-            specialDiscount={data.special_discount}
-            totalPayable={data.amount_after_discount}
-          />
-        </div>
-      </div>
-    </Loader>
-  );
+  return <Loader isLoading={isFetching}></Loader>;
 };
 
 export default SalesReturnDetails;
