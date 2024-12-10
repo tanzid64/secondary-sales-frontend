@@ -1,3 +1,4 @@
+import { DetailsTablePrint } from "@/components/details-table-print";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
@@ -6,7 +7,6 @@ import { useQuery } from "@tanstack/react-query";
 import { DownloadIcon, PrinterIcon } from "lucide-react";
 import { FC, useRef } from "react";
 import { useParams } from "react-router";
-import { DetailsTable } from "@/components/details-table";
 //@ts-ignore
 import html2pdf from "html2pdf.js";
 
@@ -28,7 +28,9 @@ const RetailOrderDetailsPage: FC = () => {
     margin: [15, 15, 15, 15],
     filename: `Order_${orderData?.ord_number || "unknown"}.pdf`,
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
+    html2canvas: {
+      scale: 2,
+    },
     jsPDF: { unit: "pt", format: "a4", orientation: "portrait" },
   };
 
@@ -76,9 +78,9 @@ const RetailOrderDetailsPage: FC = () => {
         <div
           id="invoice"
           ref={orderRef}
-          className="relative min-h-[1050px] p-[15px] overflow-auto"
+          className="relative min-h-[1050px] w-full p-[15px]"
         >
-          <div className="min-w-[600px]">
+          <div className="">
             <header className="py-[10px] mb-[20px] border-b border-[#3989c6]">
               <div className="flex justify-between items-center">
                 <div className="w-1/2">
@@ -130,24 +132,25 @@ const RetailOrderDetailsPage: FC = () => {
               </div>
 
               {/* Details Table */}
-              <DetailsTable
+              <DetailsTablePrint
                 products={orderData.product_details}
                 grandTotal={orderData.grand_tot}
                 discount={orderData.discount}
                 specialDiscount={orderData.special_discount}
                 totalPayable={orderData.total_payable}
               />
-
-              <div className="mt-24 flex w-full items-center justify-between">
-                <p className="tfooter-signature">বিক্রেতার স্বাক্ষর</p>
-                <p className="tfooter-signature">ক্রেতার স্বাক্ষর</p>
-              </div>
+              <div className="w-full mt-24" />
+              <footer className=" w-full text-center absolute bottom-0 left-0">
+                <div className="flex items-center justify-between">
+                  <p className="tfooter-signature">বিক্রেতার স্বাক্ষর</p>
+                  <p className="tfooter-signature">ক্রেতার স্বাক্ষর</p>
+                </div>
+                <p className="text-[#777] border-t border-[#aaa] py-[8px] ">
+                  Order details was created on a computer and is valid without
+                  the signature and seal.
+                </p>
+              </footer>
             </main>
-            {/* Signature & footer */}
-            <footer className="w-full text-center text-[#777] border-t border-[#aaa] py-[8px] absolute bottom-0">
-              Order details was created on a computer and is valid without the
-              signature and seal.
-            </footer>
           </div>
         </div>
       </div>

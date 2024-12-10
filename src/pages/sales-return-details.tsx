@@ -1,4 +1,3 @@
-import { DetailsTable } from "@/components/details-table";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
@@ -7,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { DownloadIcon, PrinterIcon } from "lucide-react";
 import { FC, useRef } from "react";
 import { useParams } from "react-router";
+import { DetailsTablePrint } from "@/components/details-table-print";
 //@ts-ignore
 import html2pdf from "html2pdf.js";
 
@@ -137,24 +137,25 @@ const SalesReturnDetails: FC = () => {
               </div>
 
               {/* Details Table */}
-              <DetailsTable
+              <DetailsTablePrint
                 products={returnData.product_details}
                 grandTotal={returnData.grand_tot}
                 discount={returnData.discount}
                 specialDiscount={returnData.special_discount}
                 totalPayable={returnData.amount_after_discount}
               />
-
-              <div className="mt-24 flex w-full items-center justify-between">
-                <p className="tfooter-signature">বিক্রেতার স্বাক্ষর</p>
-                <p className="tfooter-signature">ক্রেতার স্বাক্ষর</p>
-              </div>
+              {/* Footer & signature */}
+              <footer className="mt-24 w-full text-center absolute bottom-0 left-0">
+                <div className="flex items-center justify-between">
+                  <p className="tfooter-signature">বিক্রেতার স্বাক্ষর</p>
+                  <p className="tfooter-signature">ক্রেতার স্বাক্ষর</p>
+                </div>
+                <p className="text-[#777] border-t border-[#aaa] py-[8px] ">
+                  Return details was created on a computer and is valid without
+                  the signature and seal.
+                </p>
+              </footer>
             </main>
-            {/* Signature & footer */}
-            <footer className="w-full text-center text-[#777] border-t border-[#aaa] py-[8px] absolute bottom-0">
-              Sales return was created on a computer and is valid without the
-              signature and seal.
-            </footer>
           </div>
         </div>
       </div>

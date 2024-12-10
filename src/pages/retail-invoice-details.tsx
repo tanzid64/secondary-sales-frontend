@@ -1,4 +1,4 @@
-import { DetailsTable } from "@/components/details-table";
+import { DetailsTablePrint } from "@/components/details-table-print";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
 import { axiosInstance } from "@/lib/axios";
@@ -148,7 +148,7 @@ const InvoiceDetails: FC = () => {
               </div>
 
               {/* Details Table */}
-              <DetailsTable
+              <DetailsTablePrint
                 products={invoice.product_details}
                 grandTotal={invoice.grand_tot}
                 discount={invoice.discount}
@@ -156,16 +156,18 @@ const InvoiceDetails: FC = () => {
                 totalPayable={invoice.total_payable}
               />
 
-              <div className="mt-24 flex w-full items-center justify-between">
-                <p className="tfooter-signature">বিক্রেতার স্বাক্ষর</p>
-                <p className="tfooter-signature">ক্রেতার স্বাক্ষর</p>
-              </div>
+              <footer className="mt-24 w-full text-center absolute bottom-0 left-0">
+                <div className="flex items-center justify-between">
+                  <p className="tfooter-signature">বিক্রেতার স্বাক্ষর</p>
+                  <p className="tfooter-signature">ক্রেতার স্বাক্ষর</p>
+                </div>
+                <p className="text-[#777] border-t border-[#aaa] py-[8px] ">
+                  Invoice was created on a computer and is valid without
+                  the signature and seal.
+                </p>
+              </footer>
             </main>
 
-            <footer className="w-full text-center text-[#777] border-t border-[#aaa] py-[8px] absolute bottom-0">
-              Invoice was created on a computer and is valid without the
-              signature and seal.
-            </footer>
           </div>
         </div>
       </div>

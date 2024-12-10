@@ -20,7 +20,7 @@ export const DetailsTable: FC<DetailsTableProps> = ({
   return (
     <table className="border-0 w-full border-collapse border-spacing-0 mb-[20px] overflow-x-auto">
       <thead>
-        <tr className="">
+        <tr className="border-b border-[#D9D9D9]">
           <th className="th-header">#</th>
           <th className="th-header text-left">পণ্যের কোড</th>
           <th className="th-header text-left">পণ্যের নাম</th>
