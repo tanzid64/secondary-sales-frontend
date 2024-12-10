@@ -81,7 +81,7 @@ const InvoiceDetails: FC = () => {
         <div
           id="invoice"
           ref={invoiceRef}
-          className="relative min-h-[90vh] p-[15px] overflow-auto"
+          className="relative min-h-[1050px] p-[15px] overflow-auto"
         >
           <div className="min-w-[600px]">
             <header className="py-[10px] mb-[20px] border-b border-[#3989c6]">

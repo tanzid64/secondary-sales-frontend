@@ -145,7 +145,7 @@ const RetailOrderDetailsPage: FC = () => {
             </main>
             {/* Signature & footer */}
             <footer className="w-full text-center text-[#777] border-t border-[#aaa] py-[8px] absolute bottom-0">
-              Invoice was created on a computer and is valid without the
+              Order details was created on a computer and is valid without the
               signature and seal.
             </footer>
           </div>
