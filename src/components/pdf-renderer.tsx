@@ -1,9 +1,7 @@
 import { convertNumbers } from "@/lib/convert-numbers";
 import { ProductDetailType } from "@/lib/types";
-import { Font, StyleSheet, Text, View, Image } from "@react-pdf/renderer";
+import { Font, Image, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { FC } from "react";
-import Logo from "/savoy_logo.png";
-
 Font.register({
   family: "Roboto",
   fonts: [
@@ -26,130 +24,138 @@ Font.register({
     },
   ],
 });
+
+const primaryColor = "#3989c6";
+
 export const PDFStyles = StyleSheet.create({
   page: {
     padding: 30,
-    fontSize: 10,
-    lineHeight: 1.5,
-    fontFamily: "Trio Bangla",
   },
-  fontRoboto: {
-    fontFamily: "Roboto",
+  // Header
+  header: {
+    paddingVertical: 10,
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: primaryColor,
   },
   headerContainer: {
-    flexDirection: "column",
-    alignItems: "center",
+    flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 20,
+    alignItems: "center",
   },
-  logo: {
-    width: 70, // Adjust width
-    height: 70, // Adjust height
-  },
-  header: {
+  distributorText: {
     fontSize: 16,
-    textAlign: "center",
-    flex: 1,
     fontFamily: "Trio Bangla",
-    fontWeight: "bold",
+    fontWeight: "normal",
   },
-  companyInfo: {
-    marginBottom: 20,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  boldText: {
-    fontWeight: "bold",
-  },
-  table: {
-    marginTop: 20,
-    borderWidth: 1,
-    borderColor: "#000",
-  },
-  tableRow: {
-    flexDirection: "row",
-    borderBottomWidth: 1,
-    borderBottomColor: "#000",
-    padding: 5,
-  },
-  tableCell: {
-    flex: 1,
-    textAlign: "center",
-    padding: 2,
-  },
-  tableCellHeader: {
-    fontWeight: "bold",
-    backgroundColor: "#f0f0f0",
-  },
-  footer: {
-    marginTop: 20,
-    textAlign: "center",
-    fontSize: 10,
-  },
-  signature: {
-    marginTop: 80,
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexDirection: "row",
-  },
-  noBorderRow: {
-    flexDirection: "row",
-    padding: 3,
-    alignItems: "center",
-  },
-  noBorderCell: {
-    flex: 1,
-    textAlign: "center",
-    padding: 0,
-
-    alignItems: "flex-end",
-  },
-  rightAlignedCell: {
-    flex: 1,
+  textRight: {
     textAlign: "right",
-    padding: 2,
-    paddingRight: 0,
-    alignItems: "flex-end",
   },
   upperCase: {
     textTransform: "uppercase",
+  },
+  logo: {
+    width: 50,
+    height: 50,
+  },
+  // Table
+  tableWrapper: {
+    marginBottom: 20,
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+  },
+  headerRow: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#000",
+  },
+  thHeader: {
+    padding: 15,
+    fontFamily: "Trio Bangla",
+    fontWeight: "normal",
+    fontSize: 12,
+  },
+  thLeft: {
+    textAlign: "left",
+  },
+  thRight: {
+    textAlign: "right",
+  },
+  row: {
+    flexDirection: "row",
+    // borderBottomWidth: 1,
+    // borderBottomColor: "#ddd",
+  },
+  td: {
+    padding: 15,
+    fontFamily: "Trio Bangla",
+    fontSize: 12,
+  },
+  tdRight: {
+    textAlign: "right",
+  },
+  tdLeft: {
+    textAlign: "left",
+  },
+  tdCenter: {
+    textAlign: "center",
+  },
+
+  footerRow: {
+    flexDirection: "row",
+  },
+  footerCell: {
+    paddingHorizontal: 15,
+    fontFamily: "Trio Bangla",
+    fontSize: 12,
+  },
+  footerLabelCell: {
+    paddingTop: 5,
+    borderTopWidth: 1,
+    borderTopColor: "#000",
+    textAlign: "center",
+  },
+  footerValueCell: {
+    paddingTop: 5,
+    borderTopWidth: 1,
+    borderTopColor: "#000",
+    textAlign: "right",
+  },
+
+  noBorderRow: {
+    flexDirection: "row",
+  },
+  noBorderCell: {
+    padding: 15,
+    fontFamily: "Trio Bangla",
+    fontSize: 12,
+  },
+  footerNoBorderCell: {
+    textAlign: "right",
+    padding: 15,
+    fontFamily: "Trio Bangla",
+    fontSize: 12,
   },
 });
 
 const styles = PDFStyles;
 
-export const PDFHeader: FC<{ title: string; }> = ({ title }) => {
+export const PDFHeader: FC<{ distributorName: string }> = ({
+  distributorName,
+}) => {
   return (
-    <View style={styles.headerContainer}>
-      <Image style={styles.logo} src={Logo} />
-      <Text style={styles.header}>{title}</Text>
-    </View>
-  );
-};
-
-export const PDFCompanyInfo: FC<{
-  title: string;
-  name: string;
-}> = ({ title, name }) => {
-  return (
-    <View style={styles.companyInfo}>
-      <Text style={styles.boldText}>{title}:</Text>
-      <Text style={styles.upperCase}>{name}</Text>
-    </View>
-  );
-};
-
-export const PDFDistributor: FC<{
-  title: string;
-  name: string;
-}> = ({ title, name }) => {
-  return (
-    <View>
-      <Text style={styles.boldText}>{title}:</Text>
-      <Text>{name}</Text>
+    <View style={styles.header}>
+      <view style={styles.headerContainer}>
+        <view>
+          <Image style={styles.logo} src="/savoy_logo.png" />
+        </view>
+        <view>
+          <Text style={styles.distributorText}>ডিস্ট্রিবিউটর তথ্যঃ</Text>
+          <Text style={styles.upperCase}>{distributorName}</Text>
+        </view>
+      </view>
     </View>
   );
 };
@@ -172,95 +178,127 @@ export const PDFInfoTable: FC<PDFInfoTableProps> = ({
   amount_after_discount,
 }) => {
   return (
-    <View style={styles.table}>
-      <View style={[styles.tableRow, styles.tableCellHeader]}>
-        <Text style={styles.tableCell}>পণ্যের কোড</Text>
-        <Text style={styles.tableCell}>পণ্যের নাম</Text>
-        <Text style={styles.tableCell}>প্রতি ইউনিট মূল্য</Text>
-        <Text style={styles.tableCell}>পরিমাণ</Text>
-        <Text style={styles.tableCell}>মূল্য</Text>
+    <View style={styles.tableWrapper}>
+      {/* Table Header */}
+      <View style={[styles.headerRow, styles.table]}>
+        <Text style={[styles.thHeader, styles.tdCenter, { flex: 0.5 }]}>#</Text>
+        <Text style={[styles.thHeader, styles.thLeft, { flex: 1 }]}>
+          পণ্যের কোড
+        </Text>
+        <Text style={[styles.thHeader, styles.thLeft, { flex: 1 }]}>
+          পণ্যের নাম
+        </Text>
+        <Text style={[styles.thHeader, styles.thRight, { flex: 1 }]}>
+          প্রতি ইউনিট মূল্য
+        </Text>
+        <Text style={[styles.thHeader, styles.thRight, { flex: 1 }]}>
+          পরিমাণ
+        </Text>
+        <Text style={[styles.thHeader, styles.thRight, { flex: 1 }]}>
+          মূল্য
+        </Text>
       </View>
-      {products.map((product) => (
-        <View style={styles.tableRow} key={product.product_code}>
-          <Text style={styles.tableCell}>
+
+      {/* Table Body */}
+      {products.map((product, idx) => (
+        <View style={[styles.row, styles.table]} key={product.product_code}>
+          <Text style={[styles.td, styles.tdCenter, { flex: 0.5 }]}>
+            {convertNumbers(idx + 1)}
+          </Text>
+          <Text style={[styles.td, styles.tdLeft, { flex: 1 }]}>
             {convertNumbers(product.product_code)}
           </Text>
-          <Text style={styles.tableCell}>{product.product_name}</Text>
-          <Text style={styles.tableCell}>
+          <Text style={[styles.td, styles.tdLeft, { flex: 1 }]}>
+            {product.product_name}
+          </Text>
+          <Text style={[styles.td, styles.tdRight, { flex: 1 }]}>
             {convertNumbers(product.ctn_price)}
           </Text>
-          <Text style={styles.tableCell}>
+          <Text style={[styles.td, styles.tdRight, { flex: 1 }]}>
             {convertNumbers(product.pqty_in_ctn)}
           </Text>
-          <Text style={styles.tableCell}>
+          <Text style={[styles.td, styles.tdRight, { flex: 1 }]}>
             {convertNumbers(product.line_total)}
           </Text>
         </View>
       ))}
 
-      {/* Subtotal and Total */}
-      <View style={styles.noBorderRow}>
-        <Text style={styles.noBorderCell} />
-        <Text style={styles.noBorderCell} />
-        <Text style={styles.rightAlignedCell}>সর্বমোট</Text>
-        <Text style={styles.noBorderCell}>{convertNumbers(grand_tot)}</Text>
+      {/* Footer (Totals) */}
+      {/* সারমোট Row */}
+      <View style={[styles.footerRow, styles.table]}>
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, styles.footerLabelCell, { flex: 1 }]}>
+          সর্বমোট
+        </Text>
+        <Text style={[styles.footerCell, styles.footerValueCell, { flex: 1 }]}>
+          {convertNumbers(grand_tot)}
+        </Text>
       </View>
-      <View style={styles.noBorderRow}>
-        <Text style={styles.noBorderCell} />
-        <Text style={styles.noBorderCell} />
-        <Text style={styles.rightAlignedCell}>ডিসকাঊন্ট</Text>
-        <Text style={styles.noBorderCell}>{convertNumbers(discount)}</Text>
+
+      {/* ডিসকাঊন্ট Row */}
+      <View style={[styles.noBorderRow, styles.table]}>
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, { flex: 1, textAlign: "center" }]}>
+          ডিসকাঊন্ট
+        </Text>
+        <Text style={[styles.footerCell, styles.textRight, { flex: 1 }]}>
+          {convertNumbers(discount)}
+        </Text>
       </View>
-      <View style={styles.noBorderRow}>
-        <Text style={styles.noBorderCell} />
-        <Text style={styles.noBorderCell} />
-        <Text style={styles.rightAlignedCell}> বিশেষ ডিসকাঊন্ট</Text>
-        <Text style={styles.noBorderCell}>
+
+      {/* বিশেষ ডিসকাঊন্ট Row */}
+      <View style={[styles.noBorderRow, styles.table]}>
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, { flex: 1 }]} />
+        <Text style={[styles.footerCell, { flex: 1, textAlign: "center" }]}>
+          বিশেষ ডিসকাঊন্ট
+        </Text>
+        <Text style={[styles.footerCell, styles.textRight, { flex: 1 }]}>
           {convertNumbers(special_discount)}
         </Text>
       </View>
+
+      {/* মোট টাকা Row */}
       {total_payable && (
-        <View style={styles.noBorderRow}>
-          <Text style={styles.noBorderCell} />
-          <Text style={styles.noBorderCell} />
-          <Text style={styles.rightAlignedCell}>মোট টাকা</Text>
-          <Text style={styles.noBorderCell}>
+        <View style={[styles.footerRow, styles.table]}>
+          <Text style={[styles.footerCell, { flex: 1 }]} />
+          <Text style={[styles.footerCell, { flex: 1 }]} />
+          <Text style={[styles.footerCell, { flex: 1 }]} />
+          <Text
+            style={[styles.footerCell, styles.footerLabelCell, { flex: 1 }]}
+          >
+            মোট টাকা
+          </Text>
+          <Text
+            style={[styles.footerCell, styles.footerValueCell, { flex: 1 }]}
+          >
             {convertNumbers(total_payable)}
           </Text>
         </View>
       )}
+
       {amount_after_discount && (
-        <View style={styles.noBorderRow}>
-          <Text style={styles.noBorderCell} />
-          <Text style={styles.noBorderCell} />
-          <Text style={styles.rightAlignedCell}>মোট টাকা</Text>
-          <Text style={styles.noBorderCell}>
+        <View style={[styles.footerRow, styles.table]}>
+          <Text style={[styles.footerCell, { flex: 1 }]} />
+          <Text style={[styles.footerCell, { flex: 1 }]} />
+          <Text style={[styles.footerCell, { flex: 1 }]} />
+          <Text
+            style={[styles.footerCell, styles.footerLabelCell, { flex: 1 }]}
+          >
+            মোট টাকা
+          </Text>
+          <Text
+            style={[styles.footerCell, styles.footerValueCell, { flex: 1 }]}
+          >
             {convertNumbers(amount_after_discount)}
           </Text>
         </View>
       )}
-    </View>
-  );
-};
-
-export const PDFFooter: FC<{ outlet_name: string }> = ({ outlet_name }) => {
-  return (
-    <View style={styles.footer}>
-      <Text>Terms & Conditions</Text>
-      <Text style={styles.upperCase}>{outlet_name}</Text>
-    </View>
-  );
-};
-
-export const PDFSignature: FC = () => {
-  return (
-    <View style={styles.signature}>
-      <View>
-        <Text>বিক্রেতার স্বাক্ষর</Text>
-      </View>
-      <View>
-        <Text>ক্রেতার স্বাক্ষর</Text>
-      </View>
     </View>
   );
 };

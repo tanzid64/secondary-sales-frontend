@@ -11,3 +11,4 @@ export function cn(...inputs: ClassValue[]) {
 export const banglaFormattedDate = (date: Date | string) => {
   return convertNumbers(format(new Date(date), "PP", { locale: bn }));
 };
+

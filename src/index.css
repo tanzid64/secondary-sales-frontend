@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tiro+Bangla:ital@0;1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tiro+Bangla:ital@0;1&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -69,13 +69,15 @@
 
 @layer utilities {
   .th-header {
-    @apply p-[15px] whitespace-nowrap font-normal text-[16px] font-tiro-bangla ;
+    @apply p-[15px] whitespace-nowrap font-normal text-[16px] font-tiro-bangla;
   }
   .td {
     @apply p-[15px] text-right text-[1.2em] font-tiro-bangla text-base;
   }
 
-  .tfooter-signature{
+  .tfooter-signature {
     @apply font-tiro-bangla font-normal text-lg border-t border-t-primary p-2 pt-1;
   }
 }
+
+
