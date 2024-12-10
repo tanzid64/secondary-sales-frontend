@@ -49,43 +49,40 @@ export const DetailsTable: FC<DetailsTableProps> = ({
       </tbody>
       <tfoot className="text-base">
         <tr>
-          {/* 3 columns blank */}
           <td colSpan={3} className="p-[15px]"></td>
-          {/* 2 columns for the label */}
           <td
             colSpan={2}
-            className="px-[15px] text-center font-tiro-bangla border-t border-t-primary"
+            className="px-[15px] text-right font-tiro-bangla border-t border-t-primary"
           >
             সর্বমোট
           </td>
-          {/* 1 column for the total */}
           <td className="px-[15px] text-right font-tiro-bangla border-t border-t-primary">
             {convertNumbers(grandTotal)}
           </td>
         </tr>
         <tr>
-          <td colSpan={3} className="px-[15px]"></td>
-          <td colSpan={2} className="px-[15px] text-center font-tiro-bangla">
+          <td colSpan={3} className="p-[15px]"></td>
+          <td colSpan={2} className="px-[15px] text-right font-tiro-bangla">
             ডিসকাঊন্ট
           </td>
-          <td className="p-[15px] text-right font-tiro-bangla">
+          <td className="px-[15px] text-right font-tiro-bangla">
             {convertNumbers(discount)}
           </td>
         </tr>
-        <tr className="pb-[15px]">
-          <td colSpan={3} className="px-[15px]"></td>
-          <td colSpan={2} className="px-[15px]  text-center font-tiro-bangla">
+        <tr>
+          <td colSpan={3} className="p-[15px]"></td>
+          <td colSpan={2} className="px-[15px] text-right font-tiro-bangla">
             বিশেষ ডিসকাঊন্ট
           </td>
           <td className="px-[15px] text-right font-tiro-bangla">
             {convertNumbers(specialDiscount)}
           </td>
         </tr>
-        <tr className="">
-          <td colSpan={3} className="px-[15px] "></td>
+        <tr>
+          <td colSpan={3} className="p-[15px]"></td>
           <td
             colSpan={2}
-            className="px-[15px] text-center font-tiro-bangla border-t border-t-primary"
+            className="px-[15px] text-right font-tiro-bangla border-t border-t-primary"
           >
             মোট টাকা
           </td>
@@ -93,6 +90,7 @@ export const DetailsTable: FC<DetailsTableProps> = ({
             {convertNumbers(totalPayable)}
           </td>
         </tr>
+
       </tfoot>
     </table>
   );
